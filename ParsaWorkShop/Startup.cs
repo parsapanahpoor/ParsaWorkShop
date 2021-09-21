@@ -86,12 +86,10 @@ namespace ParsaWorkShop
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-
                     name: "MyAreas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
                 endpoints.MapControllerRoute(
-
                     name: "Default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
