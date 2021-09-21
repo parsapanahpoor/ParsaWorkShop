@@ -9,10 +9,6 @@ namespace Domain.Models.Product
 {
     public class ProductSelectedCategory
     {
-        public ProductSelectedCategory()
-        {
-
-        }
 
         [Key]
         public int ProductSelectedCategoryID { get; set; }

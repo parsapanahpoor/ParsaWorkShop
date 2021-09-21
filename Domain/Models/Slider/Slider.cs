@@ -10,10 +10,6 @@ namespace Domain.Models.Slider
 {
     public class Slider
     {
-        public Slider()
-        {
-
-        }
 
         [Key]
         public int SliderId { get; set; }

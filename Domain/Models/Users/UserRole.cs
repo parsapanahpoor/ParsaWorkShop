@@ -9,10 +9,6 @@ namespace Domain.Models.Users
 {
     public class UserRole
     {
-        public UserRole()
-        {
-
-        }
 
         [Key]
         public int UR_Id { get; set; }

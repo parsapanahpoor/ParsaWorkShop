@@ -10,11 +10,6 @@ namespace Domain.Models.Users
 {
     public class Locations
     {
-        public Locations()
-        {
-
-        }
-
         [Key]
         public int LocationID { get; set; }
 

@@ -9,10 +9,6 @@ namespace Domain.Models.Product
 {
     public class ProductFeature
     {
-        public ProductFeature()
-        {
-
-        }
 
         [Key]
         public int FeatureID { get; set; }

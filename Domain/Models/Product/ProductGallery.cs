@@ -9,10 +9,6 @@ namespace Domain.Models.Product
 {
     public class ProductGallery
     {
-        public ProductGallery()
-        {
-
-        }
         [Key]
         public int ProductGalleryId { get; set; }
         public int ProductID { get; set; }
