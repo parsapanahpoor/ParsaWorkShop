@@ -1,5 +1,7 @@
 ﻿using Application.ViewModels;
+using Domain.Models.ContactUs;
 using Domain.Models.Users;
+using Etecsho.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +26,37 @@ namespace Application.Interfaces
         int GetUserIdByUserName(string userName);
         User GetUserByUserName(string username);
         List<int> GetUsersRoles(string username);
+
+        #region User Panel
+
         InformationUserViewModel GetUserInformation(string username);
         EditProfileViewModel GetDataForEditProfileUser(string username);
         void EditProfile(string username, EditProfileViewModel profile);
+        bool CompareOldPassword(string oldPassword, string username);
+        void ChangeUserPassword(string userName, string newPassword);
+        List<User> GetUsersInRoles(int Role);
+
+        #endregion
 
 
+        #region Panel Admin
+
+        List<User> GetUsers();
+        List<User> GetDeleteUsers();
+        int AddUserFromAdmin(CreateUserViewModel user);
+        EditUserViewModel GetUserForShowInEditMode(int userId);
+        void EditUserFromAdmin(EditUserViewModel editUser);
+        SideBarUserPanelViewModel GetSideBarUserPanelData(string username);
+
+        #endregion
+
+
+        #region ContactUs
+
+        void addMessage(ContactUs contactus);
+        List<ContactUs> GetAllMessages();
+        ContactUs GetMessageById(int id);
+
+        #endregion
     }
 }

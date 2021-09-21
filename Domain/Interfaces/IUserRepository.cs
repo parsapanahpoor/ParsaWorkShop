@@ -27,15 +27,12 @@ namespace Domain.Interfaces
 
 
 
-
         #region User Panel
 
-        bool CompareOldPassword(string oldPassword, string username);
-        void ChangeUserPassword(string userName, string newPassword);
+        bool CompareOldPassword(string hashOldPassword, string username);
         List<User> GetUsersInRoles(int Role);
 
         #endregion
-
 
 
 
@@ -43,13 +40,8 @@ namespace Domain.Interfaces
 
         List<User> GetUsers();
         List<User> GetDeleteUsers();
-        //int AddUserFromAdmin(CreateUserViewModel user);
-        //EditUserViewModel GetUserForShowInEditMode(int userId);
-        //void EditUserFromAdmin(EditUserViewModel editUser);
-        //SideBarUserPanelViewModel GetSideBarUserPanelData(string username);
 
         #endregion
-
 
 
 

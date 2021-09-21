@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Domain.Models.ContactUs;
 using Domain.Models.Users;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Data.Repository
 
         public void addMessage(ContactUs contactus)
         {
-            throw new NotImplementedException();
+            _context.ContactUs.Add(contactus);
         }
 
         public int AddUser(User user)
@@ -35,30 +36,26 @@ namespace Data.Repository
             return user.UserId;
         }
 
-        public void ChangeUserPassword(string userName, string newPassword)
+    
+        public bool CompareOldPassword(string hashOldPassword, string username)
         {
-            throw new NotImplementedException();
+            return _context.Users.Any(u => u.UserName == username && u.Password == hashOldPassword);
         }
 
-        public bool CompareOldPassword(string oldPassword, string username)
-        {
-            throw new NotImplementedException();
-        }
 
-        
         public List<ContactUs> GetAllMessages()
         {
-            throw new NotImplementedException();
+            return _context.ContactUs.ToList();
         }
 
         public List<User> GetDeleteUsers()
         {
-            throw new NotImplementedException();
+            return _context.Users.IgnoreQueryFilters().Where(p => p.IsDelete).ToList();
         }
 
         public ContactUs GetMessageById(int id)
         {
-            throw new NotImplementedException();
+            return _context.ContactUs.Find(id);
         }
 
         public User GetUserByActiveCode(string ActiveCode)
@@ -93,12 +90,14 @@ namespace Data.Repository
 
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
 
         public List<User> GetUsersInRoles(int Role)
         {
-            throw new NotImplementedException();
+            var userid = _context.UsersRoles.Where(p => p.RoleId == Role).Select(p => p.UserId).ToList();
+            var users = _context.Users.Where(p => userid.Contains(p.UserId)).ToList();
+            return users;
         }
 
         public List<int> GetUsersRoles(User user)
