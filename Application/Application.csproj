@@ -7,9 +7,12 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Security\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
     <Folder Include="Utilities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.10" />
   </ItemGroup>
 
   <ItemGroup>
