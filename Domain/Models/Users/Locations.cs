@@ -23,7 +23,7 @@ namespace Domain.Models.Users
 
         #region Navigations
         public User User { get; set; }
-        public List<Models.Entites.Order.Orders> Orders { get; set; }
+        public List<Order.Orders> Orders { get; set; }
         #endregion
     }
 }

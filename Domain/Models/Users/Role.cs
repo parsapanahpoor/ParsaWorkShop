@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.Permissions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Domain.Models.Users
         public bool IsDelete { get; set; }
 
         #region Relations
-        public virtual List<UserRole> UserRoles { get; set; }
+        public  List<UserRole> UserRoles { get; set; }
         public List<RolePermission> RolePermissions { get; set; }
         #endregion
 
