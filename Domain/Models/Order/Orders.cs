@@ -26,8 +26,8 @@ namespace Domain.Models.Order
 
         #region Navigations
 
-        public Models.Entites.Users.User User { get; set; }
-        public Models.Entites.Users.Locations Locations { get; set; }
+        public Users.User User { get; set; }
+        public Users.Locations Locations { get; set; }
         public List<OrderDetails> OrderDetails { get; set; }
         public List<FinancialTransaction> FinancialTransactions { get; set; }
 

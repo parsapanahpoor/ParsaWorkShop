@@ -26,7 +26,7 @@ namespace Domain.Models.Order
 
         #region Navigations
 
-        public Order.Orders Order { get; set; }
+        public Orders Order { get; set; }
         public Product.Product Product { get; set; }
 
         #endregion

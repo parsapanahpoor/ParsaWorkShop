@@ -14,12 +14,14 @@ namespace Domain.Models.Blog
         public int VideoSelectedCategoryId { get; set; }
 
         public int BlogCategoryId { get; set; }
+
         public int VideoId { get; set; }
 
         #region Relations
 
         public virtual BlogCategory BlogCategory { get; set; }
         public virtual Video Video { get; set; }
+
         #endregion
 
     }

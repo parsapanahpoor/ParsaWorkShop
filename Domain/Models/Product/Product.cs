@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace Domain.Models.Product
         public  List<ProductSelectedCategory> ProductSelectedCategory { get; set; }
         public  List<ProductFeature> ProductFeatures { get; set; }
         public  List<ProductGallery> ProductGalleries { get; set; }
-        public List<Order.OrderDetails> OrderDetails { get; set; }
+        public  List<Order.OrderDetails> OrderDetails { get; set; }
         public  List<Comment.Comment> Comments { get; set; }
         public  User Users { get; set; }
 

@@ -14,13 +14,13 @@ namespace Domain.Models.Blog
         public int BlogSelectedCategoryId { get; set; }
 
         public int BlogCategoryId { get; set; }
+
         public int BlogId { get; set; }
 
 
         #region Relations
 
         public  BlogCategory BlogCategory { get; set; }
-
         public  Blog Blog { get; set; }
 
         #endregion

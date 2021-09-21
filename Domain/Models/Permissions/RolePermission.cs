@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace Domain.Models.Permissions
         public int PermissionId { get; set; }
 
         #region Navigation
+
         public Role Role { get; set; }
         public Permission Permission { get; set; }
 
         #endregion
-
 
     }
 

@@ -18,11 +18,5 @@ namespace Domain.Models.Comment
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string ProductTypeTitle { get; set; }
 
-
-        #region Relations
-
-
-
-        #endregion
-    }
+      }
 }
