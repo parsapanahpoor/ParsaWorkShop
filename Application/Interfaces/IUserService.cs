@@ -15,6 +15,18 @@ namespace Application.Interfaces
         bool IsExistPhoneNumber(string PhoneNumber);
         int AddUser(User user);
         User LoginUser(LoginViewModel login);
+        User GetUserByEmail(string email);
+        User GetUserByPhoneNumber(string PhoneNumber);
+        User GetUserByActiveCode(string ActiveCode);
+        User GetUserById(int Userid);
+        void UpdateUser(User user);
+        void DeleteUser(int userId);
+        int GetUserIdByUserName(string userName);
+        User GetUserByUserName(string username);
+        List<int> GetUsersRoles(string username);
+        InformationUserViewModel GetUserInformation(string username);
+        EditProfileViewModel GetDataForEditProfileUser(string username);
+        void EditProfile(string username, EditProfileViewModel profile);
 
 
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Etecsho.Utilities.Genarator
+namespace Application.Genarator
 {
     public class NameGenerator
     {

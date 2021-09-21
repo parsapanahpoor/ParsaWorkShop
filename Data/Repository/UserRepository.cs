@@ -45,11 +45,7 @@ namespace Data.Repository
             throw new NotImplementedException();
         }
 
-        public void DeleteUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public List<ContactUs> GetAllMessages()
         {
             throw new NotImplementedException();
@@ -67,32 +63,32 @@ namespace Data.Repository
 
         public User GetUserByActiveCode(string ActiveCode)
         {
-            throw new NotImplementedException();
+            return _context.Users.FirstOrDefault(p => p.ActiveCode == ActiveCode);
         }
 
         public User GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            return _context.Users.SingleOrDefault(u => u.Email == email);
         }
 
         public User GetUserById(int Userid)
         {
-            throw new NotImplementedException();
+            return _context.Users.Find(Userid);
         }
 
         public User GetUserByPhoneNumber(string PhoneNumber)
         {
-            throw new NotImplementedException();
+            return _context.Users.FirstOrDefault(p => p.PhoneNumber == PhoneNumber);
         }
 
         public User GetUserByUserName(string username)
         {
-            throw new NotImplementedException();
+            return _context.Users.SingleOrDefault(u => u.UserName == username);
         }
 
         public int GetUserIdByUserName(string userName)
         {
-            throw new NotImplementedException();
+            return _context.Users.Single(u => u.UserName == userName).UserId;
         }
 
         public List<User> GetUsers()
@@ -105,9 +101,9 @@ namespace Data.Repository
             throw new NotImplementedException();
         }
 
-        public List<int> GetUsersRoles(string username)
+        public List<int> GetUsersRoles(User user)
         {
-            throw new NotImplementedException();
+            return _context.UsersRoles.Where(p => p.UserId == user.UserId).Select(p => p.RoleId).ToList();
         }
 
         public bool IsExistEmail(string email)
@@ -130,9 +126,14 @@ namespace Data.Repository
             return _context.Users.SingleOrDefault(u => u.PhoneNumber == PhoneNumber && u.Password == Password);
         }
 
+        public void Savechanges()
+        {
+            _context.SaveChanges();
+        }
+
         public void UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            _context.Update(user);
         }
 
 

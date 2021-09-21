@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Etecsho.Utilities.Security
+namespace Application.Security
 {
     public static class ImageValidator
     {
