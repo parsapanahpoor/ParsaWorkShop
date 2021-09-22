@@ -40,6 +40,7 @@ namespace Application.Interfaces
         int AddBlog(Blog blog, IFormFile imgBlogUp, User user);
         void AddCategoryToBlog(List<int> Categories, int BlogId);
         int UpdateBlog(Blog blog, IFormFile imgBlogUp);
+        void UpdateBlogs(Blog blog);
         Blog GetBlogById(int blogid);
         List<BlogSelectedCategory> GetAllBlogSelectedCategory();
         void EditBlogSelectedCategory(List<int> Categories, int BlogId);

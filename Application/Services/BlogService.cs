@@ -131,6 +131,21 @@ namespace Application.Services
 
         public void DeleteBlog(Blog blog)
         {
+            if (blog.BlogImageName != "no-photo.png")
+            {
+                string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/image", blog.BlogImageName);
+                if (File.Exists(deleteimagePath))
+                {
+                    File.Delete(deleteimagePath);
+                }
+
+                string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", blog.BlogImageName);
+                if (File.Exists(deletethumbPath))
+                {
+                    File.Delete(deletethumbPath);
+                }
+            }
+            blog.BlogImageName = "no-photo.png";
             blog.IsDelete = true;
             _blog.UpdateBlog(blog);
         }
@@ -361,6 +376,11 @@ namespace Application.Services
         public void UpdateBlogForLock(Video video)
         {
             _blog.UpdateVideo(video);
+        }
+
+        public void UpdateBlogs(Blog blog)
+        {
+            _blog.UpdateBlog(blog);
         }
 
         public int UpdateVideo(Video video, IFormFile imgBlogUp, IFormFile demoUp)
