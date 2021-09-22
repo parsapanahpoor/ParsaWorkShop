@@ -19,6 +19,12 @@ namespace Data.Repository
             _context = context;
         }
 
+        public void AddBlog(Blog blog)
+        {
+            _context.Blog.Add(blog);
+            Savechanges();
+        }
+
         public void AddBlogCategory(BlogCategory blogCategory)
         {
             _context.BlogCategories.Add(blogCategory);
@@ -26,9 +32,10 @@ namespace Data.Repository
             Savechanges();
         }
 
-        public void AddCategoryToBlog(List<int> Categories, int BlogId)
+        public void AddCategoryToBlog(BlogSelectedCategory blog)
         {
-            throw new NotImplementedException();
+            _context.BlogSelectedCategories.Add(blog);
+            Savechanges();
         }
 
         public void AddCategoryToVideo(VideoSelectedCategory video)
@@ -44,17 +51,13 @@ namespace Data.Repository
             Savechanges();
         }
 
-        public void DeleteBlog(Blog blog)
+        public void EditBlogSelectedCategory(int BlogId)
         {
-            throw new NotImplementedException();
+            _context.BlogSelectedCategories.Where(p => p.BlogId == BlogId).ToList()
+                                                    .ForEach(p => _context.BlogSelectedCategories.Remove(p));
         }
 
-        public void EditBlogSelectedCategory(List<int> Categories, int BlogId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void EditeVideoSelectedCategory( int videoid)
+        public void EditeVideoSelectedCategory(int videoid)
         {
             var groups = _context.VideoSelectedCategory.Where(p => p.VideoId == videoid).ToList();
 
@@ -71,17 +74,26 @@ namespace Data.Repository
 
         public List<Blog> GetAllBlogs()
         {
-            throw new NotImplementedException();
+            return _context.Blog.Include(p => p.Users).ToList();
         }
 
         public List<BlogSelectedCategory> GetAllBlogSelectedCategory()
         {
-            throw new NotImplementedException();
+            return _context.BlogSelectedCategories.ToList();
+        }
+
+        public IQueryable<Blog> GetAllBlogsForIQueryable()
+        {
+            return _context.Blog.Include(p => p.Users).Include(p => p.BlogSelectedCategory)
+                                 .Where(p => p.IsActive).OrderByDescending(p => p.CreateDate);
         }
 
         public List<Blog> GetAllDeletedBlogs()
         {
-            throw new NotImplementedException();
+            IQueryable<Blog> result = _context.Blog.Include(p => p.Users)
+                            .IgnoreQueryFilters().Where(u => u.IsDelete);
+
+            return result.ToList();
         }
 
         public List<Video> GetAllDeletedVideos()
@@ -104,7 +116,7 @@ namespace Data.Repository
 
         public Blog GetBlogById(int blogid)
         {
-            throw new NotImplementedException();
+            return _context.Blog.Include(p => p.Users).FirstOrDefault(p => p.BlogId == blogid);
         }
 
         public BlogCategory GetBlogCategoryById(int id)
@@ -112,24 +124,31 @@ namespace Data.Repository
             return _context.BlogCategories.Find(id);
         }
 
-        public Tuple<List<Blog>, int> GetBlogsForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0)
+        public IQueryable<Blog> GetBlogsByCategoriID(int? Categroyid)
         {
-            throw new NotImplementedException();
+            return _context.BlogSelectedCategories.Where(p => p.BlogCategoryId == Categroyid).Include(p => p.Blog)
+                                       .ThenInclude(p => p.Users).Select(p => p.Blog);                                             
         }
 
         public List<Blog> GetLastestBlogs()
         {
-            throw new NotImplementedException();
+            return _context.Blog.OrderByDescending(p => p.CreateDate).ToList();
         }
 
         public List<Video> GetLastestVideos()
         {
-            throw new NotImplementedException();
+            return _context.Video.OrderByDescending(p => p.CreateDate).ToList();
         }
 
         public string GetUserNameByBlog(int blogid)
         {
-            throw new NotImplementedException();
+            return _context.Blog.Where(p => p.BlogId == blogid).Include(p => p.Users).Select(p => p.Users.UserName).Single();
+        }
+
+        public IQueryable<Video> GetVideoByCategoriID(int? Categroyid)
+        {
+            return _context.VideoSelectedCategory.Where(p => p.BlogCategoryId == Categroyid).Include(p => p.Video)
+                                       .ThenInclude(p => p.Users).Select(p => p.Video);
         }
 
         public Video GetVideoById(int VideoId)
@@ -138,19 +157,25 @@ namespace Data.Repository
                                             .FirstOrDefault(p => p.VideoId == VideoId);
         }
 
-        public Tuple<List<Video>, int> GetVideosForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Savechanges()
         {
             _context.SaveChanges();
         }
 
+        public IQueryable<Blog> SearchForBlog(string Filter)
+        {
+            return _context.Blog.Where(c => c.BlogTitle.Contains(Filter) || c.Tags.Contains(Filter)).Include(p => p.Users);
+        }
+
+        public IQueryable<Video> SearchForVideo(string Filter)
+        {
+            return _context.Video.Where(c => c.VideoTitle.Contains(Filter) || c.Tags.Contains(Filter)).Include(p => p.Users);
+        }
+
         public void UpdateBlog(Blog blog)
         {
-            throw new NotImplementedException();
+            _context.Blog.Update(blog);
+            Savechanges();
         }
 
         public void UpdateBlogCategroy(BlogCategory blogCategory)
@@ -165,6 +190,12 @@ namespace Data.Repository
             _context.Video.Update(video);
 
             Savechanges();
+        }
+
+        IQueryable<Video> IBlogRepository.GetAllVideosForIQueryable()
+        {
+            return _context.Video.Include(p => p.Users).Include(p => p.VideoSelectedCategory)
+                                            .Where(p => p.IsActive).OrderByDescending(p => p.CreateDate);
         }
     }
 }

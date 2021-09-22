@@ -29,55 +29,38 @@ namespace Domain.Interfaces
         void AddCategoryToVideo(VideoSelectedCategory video);
         List<VideoSelectedCategory> GetAllVideoSelectedCategories();
         Video GetVideoById(int VideoId);
-        void EditeVideoSelectedCategory( int videoid);
+        void EditeVideoSelectedCategory(int videoid);
 
         #endregion
-
 
 
         #region Blogs
 
         List<Blog> GetAllBlogs();
-
-        //int AddBlog(Models.Entites.Blog.Blog blog, IFormFile imgBlogUp, User user);
-        void AddCategoryToBlog(List<int> Categories, int BlogId);
-
-        //int UpdateBlog(Models.Entites.Blog.Blog blog, IFormFile imgBlogUp);
-
+        void AddBlog(Blog blog);
+        void AddCategoryToBlog(BlogSelectedCategory blog);
         Blog GetBlogById(int blogid);
-
         List<BlogSelectedCategory> GetAllBlogSelectedCategory();
-
-        void EditBlogSelectedCategory(List<int> Categories, int BlogId);
-
+        void EditBlogSelectedCategory(int BlogId);
         string GetUserNameByBlog(int blogid);
-
         void UpdateBlog(Blog blog);
-
-        void DeleteBlog(Blog blog);
-
         List<Blog> GetAllDeletedBlogs();
 
-
         #endregion
-
 
 
         #region HomPage
 
-        Tuple<List<Blog>, int> GetBlogsForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "",
-                        int take = 0);
-
-        Tuple<List<Video>, int> GetVideosForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "",
-               int take = 0);
+        IQueryable<Blog> SearchForBlog(string Filter);
+        IQueryable<Blog> GetAllBlogsForIQueryable();
+        IQueryable<Blog> GetBlogsByCategoriID(int? Categroyid);
+        IQueryable<Video> SearchForVideo(string Filter);
+        IQueryable<Video> GetAllVideosForIQueryable();
+        IQueryable<Video> GetVideoByCategoriID(int? Categroyid);
         List<Blog> GetLastestBlogs();
-
         List<Video> GetLastestVideos();
 
-
         #endregion
-
-
 
     }
 }

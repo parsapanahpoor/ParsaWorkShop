@@ -35,6 +35,27 @@ namespace Application.Interfaces
         void UpdateBlogForLock(Video video);
         #endregion
 
+        #region Blog
+        List<Blog> GetAllBlogs();
+        int AddBlog(Blog blog, IFormFile imgBlogUp, User user);
+        void AddCategoryToBlog(List<int> Categories, int BlogId);
+        int UpdateBlog(Blog blog, IFormFile imgBlogUp);
+        Blog GetBlogById(int blogid);
+        List<BlogSelectedCategory> GetAllBlogSelectedCategory();
+        void EditBlogSelectedCategory(List<int> Categories, int BlogId);
+        string GetUserNameByBlog(int blogid);
+        void DeleteBlog(Blog blog);
+        List<Blog> GetAllDeletedBlogs();
+        #endregion
+
+        #region HomePage
+
+        Tuple<List<Blog>, int> GetBlogsForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0);
+        Tuple<List<Video>, int> GetVideosForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0);
+        List<Blog> GetLastestBlogs();
+        List<Video> GetLastestVideos();
+
+        #endregion
 
     }
 }
