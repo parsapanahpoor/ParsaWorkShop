@@ -1,5 +1,5 @@
-﻿@model Etecsho.Models.ViewModels.EditUserViewModel
-@using Etecsho.Models.Entites.Users
+﻿@model Application.ViewModels.EditUserViewModel
+@using Domain.Models.Users
 @{
     ViewData["Title"] = "حذف کاربر ";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -27,6 +27,7 @@
 
         <input type="hidden" asp-for="UserId" />
         <input type="hidden" asp-for="AvatarName" />
+        <input type="hidden" asp-for="Password" />
 
         <section class="content">
             <div class="container-fluid">
@@ -62,12 +63,7 @@
                                         <span asp-validation-for="Email" class="text-danger"></span>
 
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">پسورد </label>
-                                        <input type="password" asp-for="Password" readonly class="form-control" id="exampleInputPassword1" placeholder="پسورد را وارد کنید">
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-
-                                    </div>
+                                   
 
 
                                 </div>
@@ -94,7 +90,7 @@
                             <!-- form start -->
                             <div class="form-horizontal">
                                 <div class="card-body row">
-                                    <img style="margin:auto; width:342px" id="imgAvatar" class="img-responsive rounded" src="/UserAvatar/@Model.AvatarName" alt="upload_img">
+                                    <img style="margin:auto; width:342px" id="imgAvatar" class="img-responsive rounded" src="/Images/UserAvatar/@Model.AvatarName" alt="upload_img">
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">

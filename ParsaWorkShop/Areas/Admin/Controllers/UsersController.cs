@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using Etecsho.Models.ViewModels;
+using Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace ParsaWorkShop.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+
     public class UsersController : Controller
     {
         #region Ctor
 
         private IUserService _userService;
+        private IPermissionService _permissionService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IPermissionService permissionService)
         {
             _userService = userService;
+            _permissionService = permissionService;
         }
 
         #endregion
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+     
         public IActionResult Index(int? id, bool Create = false, bool Edit = false, bool Delete = false)
         {
             ViewBag.Create = Create;
@@ -51,7 +51,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            //ViewData["Roles"] = _permissionService.GetRoles();
+            ViewData["Roles"] = _permissionService.GetRoles();
 
             return View();
         }
@@ -62,7 +62,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 int userId = _userService.AddUserFromAdmin(user);
-                //_permissionService.AddRolesToUser(SelectedRoles, userId);
+                _permissionService.AddRolesToUser(SelectedRoles, userId);
 
                 return Redirect("/Admin/Users/Index?Create=true");
             }
@@ -77,7 +77,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
             }
 
             EditUserViewModel user = _userService.GetUserForShowInEditMode((int)id);
-            //ViewData["Roles"] = _permissionService.GetRoles();
+            ViewData["Roles"] = _permissionService.GetRoles();
 
             if (user == null)
             {
@@ -94,7 +94,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
             }
 
             EditUserViewModel user = _userService.GetUserForShowInEditMode((int)id);
-            //ViewData["Roles"] = _permissionService.GetRoles();
+            ViewData["Roles"] = _permissionService.GetRoles();
 
             if (user == null)
             {
@@ -114,7 +114,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
                 try
                 {
                     _userService.EditUserFromAdmin(user);
-                    //_permissionService.EditRolesUser(user.UserId, SelectedRoles);
+                    _permissionService.EditRolesUser(user.UserId, SelectedRoles);
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -130,7 +130,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
                 }
                 return Redirect("/Admin/Users/Index?Edit=true");
             }
-            //ViewData["Roles"] = _permissionService.GetRoles();
+            ViewData["Roles"] = _permissionService.GetRoles();
 
             return View(user);
         }
@@ -142,9 +142,8 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
                 return NotFound();
             }
 
-
             EditUserViewModel user = _userService.GetUserForShowInEditMode((int)id);
-            //ViewData["Roles"] = _permissionService.GetRoles();
+            ViewData["Roles"] = _permissionService.GetRoles();
             if (user == null)
             {
                 return NotFound();

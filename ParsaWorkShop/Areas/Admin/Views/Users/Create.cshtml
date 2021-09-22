@@ -1,5 +1,5 @@
-﻿@model Etecsho.Models.ViewModels.CreateUserViewModel
-@using Etecsho.Models.Entites.Users
+﻿@model Application.ViewModels.CreateUserViewModel
+@using Domain.Models.Users
 @{
     ViewData["Title"] = "افزودن کاربر جدید ";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -93,7 +93,7 @@
                             <!-- form start -->
                             <div class="form-horizontal">
                                 <div class="card-body row">
-                                    <img style="margin:auto; width:342px" id="imgAvatar" class="img-responsive rounded" src="~/UserAvatar/Defult.jpg" alt="upload_img">
+                                    <img style="margin:auto; width:342px" id="imgAvatar" class="img-responsive rounded" src="~/Images/UserAvatar/Defult.jpg" alt="upload_img">
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">

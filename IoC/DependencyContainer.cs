@@ -18,6 +18,7 @@ namespace IoC
             #region Application Layer
 
             service.AddScoped<IUserService, UserService>();
+            service.AddScoped<IPermissionService, PermissionService>();
 
             #endregion
 
@@ -25,6 +26,7 @@ namespace IoC
             #region Data Layer
 
             service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<IPermissionRepository, PermissionRepository>();
 
             #endregion
 

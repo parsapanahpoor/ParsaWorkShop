@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Etecsho.Models.ViewModels
+namespace Application.ViewModels
 {
 
     public class CreateUserViewModel

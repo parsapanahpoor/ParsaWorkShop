@@ -1,4 +1,5 @@
-﻿@model List<Etecsho.Models.Entites.Users.User>
+﻿@model List<Domain.Models.Users.User>
+@using Application.Convertors
 
 @{
     ViewData["Title"] = "لیست کاربران";
@@ -17,7 +18,7 @@
 <div class="content-wrapper" style="min-height: 805px;">
     @if (ViewBag.Create == true)
     {
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="card bg-success-gradient">
                 <div class="card-header">
                     <h3 class="card-title"> ثبت با موفقیت </h3>
@@ -45,7 +46,7 @@
     }
     @if (ViewBag.Edit == true)
     {
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="card bg-primary-gradient">
                 <div class="card-header">
                     <h3 class="card-title">ویرایش موفقیت آمیز  </h3>
@@ -73,7 +74,7 @@
     }
     @if (ViewBag.Delete == true)
     {
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="card bg-danger-gradient">
                 <div class="card-header">
                     <h3 class="card-title">حذف موفق </h3>
@@ -104,12 +105,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>جداول داده</h1>
+                    <h1>لیست کاربران</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="/Admin">خانه</a></li>
-                        <li class="breadcrumb-item active">جداول داده</li>
+                        <li class="breadcrumb-item active">لیست کاربران</li>
                     </ol>
                 </div>
             </div>
@@ -124,7 +125,6 @@
 
                 <div class="card ">
                     <div class="card-header">
-                        <h3 class="card-title">لیست با جستجوی پیشرفته</h3>
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <a href="/Admin/Users/Create" class="btn btn-block btn-primary btn-sm waves-effect">افزودن کاربر  جدید  </a>
@@ -140,13 +140,15 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:10px;" aria-label="عکس  : activate to sort column ascending">عکس  </th>
 
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 200.583px;" aria-sort="ascending" aria-label="نام کاربری  : activate to sort column descending">     نام کاربری</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"  aria-sort="ascending" aria-label="نام کاربری  : activate to sort column descending">     نام کاربری</th>
                                             
                                            
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 200.5px;" aria-label="موبایل : activate to sort column ascending">موبایل </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"  aria-label="موبایل : activate to sort column ascending">موبایل </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"  aria-label="موبایل : activate to sort column ascending">ایمیل </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"  aria-label="موبایل : activate to sort column ascending">ثبت نام  </th>
 
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 100.317px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 220.6px;" aria-label=" activate to sort column ascending"></th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"  aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"  aria-label=" activate to sort column ascending"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,10 +157,13 @@
                                         {
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1"> 
-                                                    <img class="direct-chat-img"  style="width:50px;height:50px;" src="/UserAvatar/@item.UserAvatar" alt="message user image">
+                                                    <img class="direct-chat-img"  style="width:50px;height:50px;" src="/Images/UserAvatar/thumb/@item.UserAvatar" alt="message user image">
                                                 </td>
                                                 <td>@item.UserName</td>
                                                 <td>@item.PhoneNumber</td>
+                                                <td>@item.Email</td>
+                                                <td>@item.RegisterDate.ToShamsi()</td>
+
                                                 @if (item.IsActive)
                                                 {
                                                     <td><a href="/Admin/Users/LockUser?Userid=@item.UserId&&id=1" class="btn btn-success btn-sm" style="color:white;">فعال</a></td>

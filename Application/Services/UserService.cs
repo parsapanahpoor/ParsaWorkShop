@@ -5,7 +5,6 @@ using Application.ViewModels;
 using Domain.Interfaces;
 using Domain.Models.ContactUs;
 using Domain.Models.Users;
-using Etecsho.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -97,6 +96,22 @@ namespace Application.Services
         {
             User user = GetUserById(userId);
             user.IsDelete = true;
+            if (user.UserAvatar != "Defult.jpg")
+            {
+                string imagePath = "";
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/UserAvatar", user.UserAvatar);
+                if (File.Exists(imagePath))
+                {
+                    File.Delete(imagePath);
+                }
+                string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/UserAvatar/thumb", user.UserAvatar);
+                if (File.Exists(deletethumbPath))
+                {
+                    File.Delete(deletethumbPath);
+                }
+            }
+            user.UserAvatar = "Defult.jpg";
+
             UpdateUser(user);
         }
 
@@ -178,7 +193,7 @@ namespace Application.Services
                 }
 
                 ImageConvertor imgResizer = new ImageConvertor();
-                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/UserAvatar/thumb", editUser.AvatarName);
+                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/UserAvatar/thumb", user.UserAvatar);
 
                 imgResizer.Image_resize(imagePath, thumbPath, 150);
             } 
