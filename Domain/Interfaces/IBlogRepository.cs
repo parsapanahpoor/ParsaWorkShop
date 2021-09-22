@@ -23,23 +23,13 @@ namespace Domain.Interfaces
 
         #region Videos
         List<Video> GetAllVideos();
-
         List<Video> GetAllDeletedVideos();
-
-        //int AddVideo(Models.Entites.Blog.Video video, IFormFile imgBlogUp, IFormFile demoUp, User user);
-        //int UpdateVideo(Models.Entites.Blog.Video video, IFormFile imgBlogUp, IFormFile demoUp);
-
-        void AddCategoryToVideo(List<int> Categories, int videoid);
-
+        void AddVideo(Video video);
+        void UpdateVideo(Video video);
+        void AddCategoryToVideo(VideoSelectedCategory video);
         List<VideoSelectedCategory> GetAllVideoSelectedCategories();
-
         Video GetVideoById(int VideoId);
-
-        void EditeVideoSelectedCategory(List<int> Categories, int videoid);
-
-        void DeleteVideos(Video video);
-
-        void UpdateBlogForLock(Video video);
+        void EditeVideoSelectedCategory( int videoid);
 
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿using Data.Context;
 using Domain.Interfaces;
 using Domain.Models.Blog;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,17 +31,20 @@ namespace Data.Repository
             throw new NotImplementedException();
         }
 
-        public void AddCategoryToVideo(List<int> Categories, int videoid)
+        public void AddCategoryToVideo(VideoSelectedCategory video)
         {
-            throw new NotImplementedException();
+            _context.VideoSelectedCategory.Add(video);
+            Savechanges();
+        }
+
+        public void AddVideo(Video video)
+        {
+            _context.Video.Add(video);
+
+            Savechanges();
         }
 
         public void DeleteBlog(Blog blog)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteVideos(Video video)
         {
             throw new NotImplementedException();
         }
@@ -50,9 +54,14 @@ namespace Data.Repository
             throw new NotImplementedException();
         }
 
-        public void EditeVideoSelectedCategory(List<int> Categories, int videoid)
+        public void EditeVideoSelectedCategory( int videoid)
         {
-            throw new NotImplementedException();
+            var groups = _context.VideoSelectedCategory.Where(p => p.VideoId == videoid).ToList();
+
+            foreach (var item in groups)
+            {
+                _context.VideoSelectedCategory.Remove(item);
+            }
         }
 
         public List<BlogCategory> GetAllBlogCategories()
@@ -77,17 +86,20 @@ namespace Data.Repository
 
         public List<Video> GetAllDeletedVideos()
         {
-            throw new NotImplementedException();
+            IQueryable<Video> result = _context.Video.Include(p => p.Users)
+                            .IgnoreQueryFilters().Where(u => u.IsDelete);
+
+            return result.ToList();
         }
 
         public List<Video> GetAllVideos()
         {
-            throw new NotImplementedException();
+            return _context.Video.Include(p => p.Users).ToList();
         }
 
         public List<VideoSelectedCategory> GetAllVideoSelectedCategories()
         {
-            throw new NotImplementedException();
+            return _context.VideoSelectedCategory.ToList();
         }
 
         public Blog GetBlogById(int blogid)
@@ -122,7 +134,8 @@ namespace Data.Repository
 
         public Video GetVideoById(int VideoId)
         {
-            throw new NotImplementedException();
+            return _context.Video.Include(p => p.Users).Include(p => p.VideoSelectedCategory)
+                                            .FirstOrDefault(p => p.VideoId == VideoId);
         }
 
         public Tuple<List<Video>, int> GetVideosForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0)
@@ -147,9 +160,11 @@ namespace Data.Repository
             Savechanges();
         }
 
-        public void UpdateBlogForLock(Video video)
+        public void UpdateVideo(Video video)
         {
-            throw new NotImplementedException();
+            _context.Video.Update(video);
+
+            Savechanges();
         }
     }
 }
