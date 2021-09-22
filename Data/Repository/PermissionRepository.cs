@@ -21,6 +21,8 @@ namespace Data.Repository
             _context = context;
         }
 
+        #endregion
+
         public void AddPermissionsToRole(int roleId, List<int> permission)
         {
             foreach (var p in permission)
@@ -124,7 +126,6 @@ namespace Data.Repository
             _context.Roles.Update(role);
         }
 
-        #endregion
 
     }
 }
