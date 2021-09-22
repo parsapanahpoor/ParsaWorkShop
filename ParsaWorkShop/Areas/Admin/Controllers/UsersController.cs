@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces;
+using Application.Security;
 using Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +12,8 @@ using System.Threading.Tasks;
 namespace ParsaWorkShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
+    [PermissionChecker(1)]
 
     public class UsersController : Controller
     {
@@ -40,7 +44,6 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
             var users = _userService.GetUsers();
 
             return View(users);
-
         }
 
         public IActionResult DeletedUsers()
@@ -107,15 +110,12 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EditUserViewModel user, List<int> SelectedRoles)
         {
-
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     _userService.EditUserFromAdmin(user);
                     _permissionService.EditRolesUser(user.UserId, SelectedRoles);
-
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -174,7 +174,6 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
             if (id == 2)
             {
                 user.IsActive = true;
-
             }
             _userService.UpdateUser(user);
             return RedirectToAction(nameof(Index));

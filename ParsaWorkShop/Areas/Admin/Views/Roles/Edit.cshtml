@@ -1,12 +1,9 @@
-﻿@model Etecsho.Models.Entites.Users.Role
-@using Etecsho.Models.Entites.Permissions
+﻿@model Domain.Models.Users.Role
+@using Domain.Models.Permissions
 
-@{
-    ViewData["Title"] = "ویرایش  ";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    List<Permission> permissions = ViewData["Permissions"] as List<Permission>;
-
-}
+@{ ViewData["Title"] = "ویرایش  ";
+                Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+                List<Permission> permissions = ViewData["Permissions"] as List<Permission>; }
 
 <div class="content-wrapper" style="min-height: 805px;">
     <!-- Content Header (Page header) -->
@@ -82,54 +79,46 @@
                                 <div class="form-group">
                                     <div class="form-check">
 
-                                        @{
-                                            List<int> SelectedPermissions = ViewData["SelectedPermissions"] as List<int>;
-                                        }
+                                        @{ List<int> SelectedPermissions = ViewData["SelectedPermissions"] as List<int>; }
                                         @foreach (var permission in permissions.Where(p => p.ParentID == null))
                                         {
 
-                                            <div style="padding-right: 40px; margin-right:10px; margin-top:10px;">
-                                                <input class="form-check-input" type="checkbox" @((SelectedPermissions.Any(p => p == permission.PermissionId) ? "checked" : "")) name="SelectedPermission" value="@permission.PermissionId">
-                                                <label class="form-check-label"> @permission.PermissionTitle</label>
-                                            </div>
+                            <div style="padding-right: 40px; margin-right:10px; margin-top:10px;">
+                                <input class="form-check-input" type="checkbox" @((SelectedPermissions.Any(p => p == permission.PermissionId) ? "checked" : "")) name="SelectedPermission" value="@permission.PermissionId">
+                                <label class="form-check-label"> @permission.PermissionTitle</label>
+                            </div>
 
                                             @if (permissions.Any(p => p.ParentID == permission.ParentID))
                                             {
-                                                @foreach (var sub in permissions.Where(p => p.ParentID == permission.PermissionId))
-                                                {
-                                                    <div style=" padding-right: 60px; margin-right: 20px; margin-top:5px;">
+                            @foreach (var sub in permissions.Where(p => p.ParentID == permission.PermissionId))
+                            {
+        <div style=" padding-right: 60px; margin-right: 20px; margin-top:5px;">
 
-                                                        <input class="form-check-input" @((SelectedPermissions.Any(p => p == sub.PermissionId) ? "checked" : "")) type="checkbox" name="SelectedPermission" value="@sub.PermissionId">
-                                                        <label class="form-check-label"> @sub.PermissionTitle</label>
-                                                    </div>
-                                                    @if (permissions.Any(p => p.ParentID == sub.ParentID))
-                                                    {
+            <input class="form-check-input" @((SelectedPermissions.Any(p => p == sub.PermissionId) ? "checked" : "")) type="checkbox" name="SelectedPermission" value="@sub.PermissionId">
+            <label class="form-check-label"> @sub.PermissionTitle</label>
+        </div>
+                                @if (permissions.Any(p => p.ParentID == sub.ParentID))
+                                {
 
-                                                        @foreach (var sub2 in permissions.Where(p => p.ParentID == sub.PermissionId))
-                                                        {
-                                                            <div style="padding-right: 80px; margin-right: 40px;  margin-top:5px;">
+        @foreach (var sub2 in permissions.Where(p => p.ParentID == sub.PermissionId))
+        {
+<div style="padding-right: 80px; margin-right: 40px;  margin-top:5px;">
 
-                                                                <input class="form-check-input"  @((SelectedPermissions.Any(p=>p==sub2.PermissionId)?"checked":"")) type="checkbox" name="SelectedPermission" value="@sub2.PermissionId">
-                                                                <label class="form-check-label"> @sub2.PermissionTitle</label>
+    <input class="form-check-input" @((SelectedPermissions.Any(p => p == sub2.PermissionId) ? "checked" : "")) type="checkbox" name="SelectedPermission" value="@sub2.PermissionId">
+    <label class="form-check-label"> @sub2.PermissionTitle</label>
 
-                                                            </div>
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+</div>}}}}}
 
 
                                         </ul>
 
 
                                         @*@foreach (var item in Roles)
-        {
-            <br />
-            <input class="form-check-input" type="checkbox" name="SelectedRoles" value="@item.RoleId" style="padding-right: 20px; margin-right: 5px; ">
-            <label class="form-check-label" style="margin-right: 30px;"> @item.RoleTitle</label>
-        }*@
+                                            {
+                                                <br />
+                                                <input class="form-check-input" type="checkbox" name="SelectedRoles" value="@item.RoleId" style="padding-right: 20px; margin-right: 5px; ">
+                                                <label class="form-check-label" style="margin-right: 30px;"> @item.RoleTitle</label>
+                                            }*@
                                     </div>
 
 

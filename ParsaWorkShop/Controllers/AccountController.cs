@@ -143,20 +143,9 @@ namespace ParsaWorkShop.Controllers
             }
             else
             {
-                if (UserRoles.Contains(1))
+                if (UserRoles.Contains(3))
                 {
                     return Redirect("/Admin/Home/Index");
-                }
-                else
-                {
-                    if (UserRoles.Contains(4))
-                    {
-                        return Redirect("/Admin/Users/Index");
-                    }
-                    if (UserRoles.Contains(2))
-                    {
-                        return Redirect("/Admin/Users/Index");
-                    }
                 }
             }
 
