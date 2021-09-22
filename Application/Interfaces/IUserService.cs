@@ -25,6 +25,7 @@ namespace Application.Interfaces
         int GetUserIdByUserName(string userName);
         User GetUserByUserName(string username);
         List<int> GetUsersRoles(string username);
+        void AddUerByService(RegisterViewModel register);
 
         #region User Panel
 

@@ -38,6 +38,23 @@ namespace Application.Services
             _userRepository.Savechanges();
         }
 
+        public void AddUerByService(RegisterViewModel register)
+        {
+            User user = new User()
+            {
+                ActiveCode = RandomNumberGenerator.GetNumber(),
+                Email = FixedText.FixEmail(register.Email),
+                IsActive = true,
+                PhoneNumber = register.PhoneNumber,
+                Password = register.Password,
+                RegisterDate = DateTime.Now,
+                UserAvatar = "Defult.jpg",
+                UserName = register.UserName
+            };
+
+            AddUser(user);
+        }
+
         public int AddUser(User user)
         {
             return _userRepository.AddUser(user);
