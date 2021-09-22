@@ -70,15 +70,15 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
-                            with font-awesome or any other icon font library -->
-                            <li class="nav-item has-treeview menu-open">
-                                <a href="/Admin" class="nav-link active">
-                                    <i class="nav-icon fa fa-dashboard"></i>
-                                    <p style="margin:auto">
+    with font-awesome or any other icon font library -->
+                            <li class="btn btn-danger" style="height:35px; margin-top:1px;">
+                                <a href="/Admin">
+                                    <p style="margin:auto; color:azure">
                                         داشبورد مدیریت
                                     </p>
                                 </a>
                             </li>
+                            
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fa fa-lock"></i>
@@ -351,57 +351,6 @@
 
                             </li>
 
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-pie-chart"></i>
-                                    <p>
-                                        مدیریت کارمندان
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a asp-area="Admin" asp-controller="Employees" asp-action="Index" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>لیست کارمندان     </p>
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a asp-area="Admin" asp-controller="Employees" asp-action="DeletedEmployees" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>کارمند های    حذف شده   </p>
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
-
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fa fa-pie-chart"></i>
-                                    <p>
-                                        مدیریت پیام ها
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
-                                </a>
-
-
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a asp-area="Admin" asp-controller="Home" asp-action="ContactUs" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>      پیام ها    </p>
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                            </li>
 
 
                             <li class="btn btn-danger" style="height:35px; margin-top:1px;">

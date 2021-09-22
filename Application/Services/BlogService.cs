@@ -160,6 +160,23 @@ namespace Application.Services
 
         public void DeleteVideos(Video video)
         {
+            if (video.VideoImageName != "no-photo.png")
+            {
+                string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/image", video.VideoImageName);
+                if (File.Exists(deleteimagePath))
+                {
+                    File.Delete(deleteimagePath);
+                }
+
+                string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", video.VideoImageName);
+                if (File.Exists(deletethumbPath))
+                {
+                    File.Delete(deletethumbPath);
+                }
+            }
+
+            video.VideoImageName = "no-photo.png";
+
             video.IsDelete = true;
             _blog.UpdateVideo(video);
         }
@@ -390,13 +407,13 @@ namespace Application.Services
 
                 if (video.VideoImageName != "no-photo.jpg")
                 {
-                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Blog/image", video.VideoImageName);
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/image", video.VideoImageName);
                     if (File.Exists(deleteimagePath))
                     {
                         File.Delete(deleteimagePath);
                     }
 
-                    string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Blog/thumb", video.VideoImageName);
+                    string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", video.VideoImageName);
                     if (File.Exists(deletethumbPath))
                     {
                         File.Delete(deletethumbPath);
