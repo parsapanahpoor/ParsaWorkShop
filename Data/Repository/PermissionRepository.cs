@@ -80,7 +80,7 @@ namespace Data.Repository
 
         public Role GetRoleById(int roleId)
         {
-            return _context.Roles.Find(roleId);
+            return _context.Roles.Single(p => p.RoleId == roleId);
         }
 
         public List<Role> GetRoles()

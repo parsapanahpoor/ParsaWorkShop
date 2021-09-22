@@ -79,7 +79,7 @@ namespace Application.Services
 
         public List<int> PermissionsRole(int roleId)
         {
-            return PermissionsRole(roleId);
+            return _permissionRepository.PermissionsRole(roleId);
         }
 
         public void Savechanges()
