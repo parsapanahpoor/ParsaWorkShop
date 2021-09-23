@@ -22,6 +22,8 @@ namespace IoC
             service.AddScoped<IBlogService, BlogService>();
             service.AddScoped<IProductService, ProductService>();
             service.AddScoped<ICommentService, CommentService>();
+            service.AddScoped<IOrderService, OrderService>();
+            service.AddScoped<ILocationService, LocationService>();
 
             #endregion
 
@@ -33,6 +35,8 @@ namespace IoC
             service.AddScoped<IBlogRepository, BlogRepository>();
             service.AddScoped<IProductRepository, ProductRepository>();
             service.AddScoped<ICommentRepository, CommentRepository>();
+            service.AddScoped<ILocationRepository, LocationRepository>();
+            service.AddScoped<IOrderRepository, OrderRepository>();
 
             #endregion
 
