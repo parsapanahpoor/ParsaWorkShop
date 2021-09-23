@@ -39,6 +39,7 @@ namespace Application.Interfaces
         Product GetProductForShowInSingleProducPage(int id);
         bool IsExistPRoduct(int productid);
         void MinusProductCountAfterSale(int productid, int count);
+        List<Product> GetLastestProductsIndexPage();
 
         #endregion
 

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Domain.Models.Blog.Video>
+@using Application.Convertors
+
+<div class="container mt-100 mt-60">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="mb-0">ویدیوی های برتر جدید    </h5>
+        </div><!--end col-->
+    </div><!--end row-->
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+<div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+    <div class="card shop-list border-0 position-relative">
+        <ul class="label list-unstyled mb-0">
+            <li><a href="/" class="badge badge-link rounded-pill bg-success">جدید  </a></li>
+        </ul>
+        <div class="shop-image position-relative overflow-hidden rounded shadow">
+            <a href="/"> <img src="/Images/Blog/thumb/@item.VideoImageName" style="width:261px;height:250px;" class="img-fluid" alt=""></a>
+
+            
+        </div>
+        <div class="card-body content pt-4 p-2">
+            <a href="shop-product-detail.html" class="text-dark product-name h6"> @item.VideoTitle</a>
+            <div class="d-flex justify-content-between mt-1">
+                <h6 class="text-muted small fst-italic mb-0 mt-1">@item.ShortDescription  </h6>
+
+            </div>
+        </div>
+    </div>
+</div><!--end col-->}
+
+    </div><!--end row-->
+</div>

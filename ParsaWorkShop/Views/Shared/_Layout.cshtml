@@ -33,22 +33,11 @@
             <!-- Logo container-->
             <div>
                 <a class="logo" href="index.html">
-                    <img src="/Landrick/images/logo-dark.png" height="24" alt="">
+                    <img src="/Landrick/images/freedom.png" class="bg-black" style="border-radius:10%" height="24" alt="">
                 </a>
             </div>
             <ul class="buy-button list-inline mb-0">
-                <li class="list-inline-item mb-0">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-link text-decoration-none dropdown-toggle p-0 pe-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="uil uil-search h5 text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-0" style="width: 300px;">
-                            <form>
-                                <input type="text" id="text" name="name" class="form-control border bg-white" placeholder="جستجو...">
-                            </form>
-                        </div>
-                    </div>
-                </li>
+               
 
                 <li class="list-inline-item mb-0 pe-1">
                     <div class="dropdown">
@@ -107,15 +96,10 @@
                 <ul class="navigation-menu">
                     <li><a href="/" class="sub-menu-item">صفحه اصلی </a></li>
 
-                    <li class="has-submenu parent-menu-item">
-                        <a href="javascript:void(0)">اسناد </a><span class="menu-arrow"></span>
-                        <ul class="submenu">
-                            <li><a href="documentation.html" class="sub-menu-item">مستند </a></li>
-                            <li><a href="changelog.html" class="sub-menu-item">تغییرات </a></li>
-                            <li><a href="components.html" class="sub-menu-item">اجزاء </a></li>
-                            <li><a href="widget.html" class="sub-menu-item">ابزارک </a></li>
-                        </ul>
-                    </li>
+                    @await Component.InvokeAsync("ProductCategriesForMenuComponent")
+                    @await Component.InvokeAsync("BlogCategriesForMenuComponent")
+                    @await Component.InvokeAsync("VideosCategriesForMenuComponent")
+
 
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -127,6 +111,7 @@
             </div><!--end navigation-->
         </div><!--end container-->
     </header><!--end header-->
+
 
 
 

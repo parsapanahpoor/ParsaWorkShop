@@ -83,7 +83,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Product/thumb", product.ProductImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 200);
+                imgResizer.Image_resize(imagePath, thumbPath, 400);
             }
 
             _product.AddProduct(product);
@@ -198,6 +198,16 @@ namespace Application.Services
             return _product.GetGalleryById(id);
         }
 
+        public List<Product> GetLastestProductsIndexPage()
+        {
+            if (_product.ProductCount() >= 4)
+            {
+                return _product.GetLastestProductsIndexPageUpper8();
+            }
+
+            return _product.GetLastestProductsIndexPageUnder8();
+        }
+
         public Product GetProductByID(int productid)
         {
             return _product.GetProductByID(productid);
@@ -307,7 +317,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images//Product/thumb", product.ProductImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 200);
+                imgResizer.Image_resize(imagePath, thumbPath, 400);
             }
 
             _product.UpdateProduct(product);

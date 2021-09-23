@@ -1,0 +1,220 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - فروشگاه</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
+    <meta name="keywords" content="Saas, Software, multi-uses, HTML, Clean, Modern" />
+    <meta name="author" content="JafarAbbasi" />
+    <meta name="email" content="jabasi26@gmail.com" />
+    <meta name="website" content="https://www.rtl-theme.com/author/tn_plugin/" />
+    <meta name="Version" content="v3.0.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Bootstrap -->
+    <link href="/Landrick/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link href="/Landrick/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/Landrick/unicons.iconscout.com/release/v3.0.6/css/line.css">
+    <!-- Slider -->
+    <link rel="stylesheet" href="/Landrick/css/tiny-slider.css" />
+    <!-- Main Css -->
+    <link href="/Landrick/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="/Landrick/css/colors/default.css" rel="stylesheet" id="color-opt">
+
+</head>
+
+<body>
+
+    <header id="topnav" class="defaultscroll sticky">
+        <div class="container">
+            <!-- Logo container-->
+            <div>
+                <a class="logo" href="index.html">
+                    <img src="/Landrick/images/logo-dark.png" class="l-dark" height="24" alt="">
+                    <img src="/Landrick/images/logo-light.png" class="l-light" height="24" alt="">
+                </a>
+            </div>
+
+            <!-- End Logo container-->
+            <div class="menu-extras">
+                <div class="menu-item">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
+            </div>
+
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu nav-light">
+                    <li><a href="index.html" class="sub-menu-item">صفحه اصلی </a></li>
+
+                    <li class="has-submenu parent-menu-item">
+                        <a href="javascript:void(0)">اسناد </a><span class="menu-arrow"></span>
+                        <ul class="submenu">
+                            <li><a href="documentation.html" class="sub-menu-item">مستند </a></li>
+                            <li><a href="changelog.html" class="sub-menu-item">تغییرات </a></li>
+                            <li><a href="components.html" class="sub-menu-item">اجزاء </a></li>
+                            <li><a href="widget.html" class="sub-menu-item">ابزارک </a></li>
+                        </ul>
+                    </li>
+                </ul><!--end navigation menu-->
+
+            </div><!--end navigation-->
+        </div><!--end container-->
+    </header><!--end header-->
+    <!-- Navbar End -->
+    <!-- Hero Start -->
+    <section class="bg-profile d-table w-100 bg-primary" style="background: url('/Landrick/images/account/bg.png') center center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="card public-profile border-0 rounded shadow" style="z-index: 1;">
+                        <partial name="_ProfileUserPartial" />
+                    </div>
+                </div><!--end col-->
+                <div class="col-lg-3"></div>
+            </div><!--end row-->
+        </div><!--ed container-->
+    </section>
+    <!-- Hero End -->
+    <!-- Profile Start -->
+    <section class="section mt-60">
+        <div class="container mt-lg-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 d-lg-block d-none">
+                    <div class="sidebar sticky-bar p-4 rounded shadow">
+
+                        <partial name="_UserPanelMenu" />
+
+
+                    </div>
+                </div><!--end col-->
+
+
+                @RenderBody()
+
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- تنظیمات پروفایل End -->
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+                    <a href="#" class="logo-footer">
+                        <img src="/Landrick/images/logo-light.png" height="24" alt="">
+                    </a>
+                    <p class="mt-4">کار با لنـدریــک را شروع کنید که می تواند همه چیزهایی را که برای ایجاد آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                    <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
+                    </ul><!--end icon-->
+                </div><!--end col-->
+
+                <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <h5 class="text-light footer-head">شرکت </h5>
+                    <ul class="list-unstyled footer-list mt-4">
+                        <li><a href="page-aboutus.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
+                        <li><a href="page-services.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات </a></li>
+                        <li><a href="page-team.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تیم </a></li>
+                        <li><a href="page-pricing.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> قیمت گذاری </a></li>
+                        <li><a href="page-portfolio-modern.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> پروژه </a></li>
+                        <li><a href="page-jobs.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مشاغل </a></li>
+                        <li><a href="page-blog-grid.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> وبلاگ </a></li>
+                        <li><a href="auth-cover-login.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> ورود </a></li>
+                    </ul>
+                </div><!--end col-->
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <h5 class="text-light footer-head">لینک های مفید </h5>
+                    <ul class="list-unstyled footer-list mt-4">
+                        <li><a href="page-terms.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات سایت </a></li>
+                        <li><a href="page-privacy.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> حریم خصوصی </a></li>
+                        <li><a href="documentation.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مستند </a></li>
+                        <li><a href="changelog.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تغییرات </a></li>
+                        <li><a href="components.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> اجزاء </a></li>
+                    </ul>
+                </div><!--end col-->
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <h5 class="text-light footer-head">خبرنامه </h5>
+                    <p class="mt-4">ثبت نام کنید و آخرین نکات را از طریق ایمیل دریافت کنید.</p>
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="foot-subscribe mb-3">
+                                    <label class="form-label">ایمیل خود را بنویسید <span class="text-danger">*</span></label>
+                                    <div class="form-icon position-relative">
+                                        <i data-feather="mail" class="fea icon-sm icons"></i>
+                                        <input type="email" name="email" id="emailsubscribe" class="form-control ps-5 rounded" placeholder="ایمیل شما: " required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-grid">
+                                    <input type="submit" id="submitsubscribe" name="send" class="btn btn-soft-primary" value="خبرنامه">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer><!--end footer-->
+    <footer class="footer footer-bar">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <div class="text-sm-start">
+                        <p class="mb-0">
+                            ©
+                            <script>document.write(new Date().getFullYear())</script> لنـدریــک. طراحی شده با  <i class="mdi mdi-heart text-danger"></i> توسط  <a href="https://www.rtl-theme.com/author/tn_plugin/" target="_blank" class="text-reset">جعفر عباسی </a>.
+                        </p>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <ul class="list-unstyled text-sm-end mb-0">
+                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/american-ex.png" class="avatar avatar-ex-sm" title="آمریکن اکسپرس" alt=""></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/discover.png" class="avatar avatar-ex-sm" title="کشف کردن" alt=""></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/master-card.png" class="avatar avatar-ex-sm" title="مستر کارت" alt=""></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/paypal.png" class="avatar avatar-ex-sm" title="پی پال" alt=""></a></li>
+                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/visa.png" class="avatar avatar-ex-sm" title="ویزا" alt=""></a></li>
+                    </ul>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer><!--end footer-->
+
+    <script src="/Landrick//Landrick/js/bootstrap.bundle.min.js"></script>
+    <!-- SLIDER -->
+    <script src="/Landrick/js/tiny-slider.js"></script>
+    <!-- Icons -->
+    <script src="/Landrick/js/feather.min.js"></script>
+    <!-- Switcher -->
+    <script src="/Landrick/js/switcher.js"></script>
+    <!-- Main Js -->
+    <script src="/Landrick/js/plugins.init.js"></script><!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
+    <script src="/Landrick/js/app.js"></script><!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
+    @RenderSection("Scripts", false)
+
+</body>
+
+</html>
+

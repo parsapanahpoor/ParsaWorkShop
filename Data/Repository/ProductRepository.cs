@@ -106,6 +106,16 @@ namespace Data.Repository
             return _context.ProductGallery.Where(p => p.ProductID == id).ToList();
         }
 
+        public List<Product> GetLastestProductsIndexPageUnder8()
+        {
+            return _context.product.OrderByDescending(p => p.CreateDate).ToList();
+        }
+
+        public List<Product> GetLastestProductsIndexPageUpper8()
+        {
+            return _context.product.OrderByDescending(p => p.CreateDate).Take(8).ToList();
+        }
+
         public Product GetProductByID(int productid)
         {
             return _context.product.Include(p => p.Users).FirstOrDefault(p => p.ProductID == productid);
@@ -147,6 +157,11 @@ namespace Data.Repository
         public bool IsExistPRoduct(int productid)
         {
             return _context.product.Any(p => p.ProductID == productid);
+        }
+
+        public int ProductCount()
+        {
+            return _context.product.Count();
         }
 
         public void Savechanges()

@@ -36,6 +36,9 @@ namespace Domain.Interfaces
         IQueryable<Product> GetProductsHaveThisCategory(int category);
         Product GetProductForShowInSingleProducPage(int id);
         bool IsExistPRoduct(int productid);
+        List<Product> GetLastestProductsIndexPageUnder8();
+        List<Product> GetLastestProductsIndexPageUpper8();
+        int ProductCount();
 
         #endregion
 

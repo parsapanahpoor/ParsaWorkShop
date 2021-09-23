@@ -1,9 +1,7 @@
 ﻿@using Application.Interfaces
 @inject IUserService _UserService
 @using Application.ViewModels
-@{
-    SideBarUserPanelViewModel user = _UserService.GetSideBarUserPanelData(User.Identity.Name);
-}
+@{ SideBarUserPanelViewModel user = _UserService.GetSideBarUserPanelData(User.Identity.Name); }
 
 <!-- Sidebar user panel (optional) -->
 <div class="user-panel mt-3 pb-3 mb-3 d-flex">

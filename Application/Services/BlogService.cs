@@ -44,7 +44,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", blog.BlogImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 200);
+                imgResizer.Image_resize(imagePath, thumbPath, 400);
             }
 
 
@@ -110,7 +110,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", video.VideoImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 200);
+                imgResizer.Image_resize(imagePath, thumbPath, 400);
             }
 
             if (demoUp != null)
@@ -279,9 +279,9 @@ namespace Application.Services
         public List<Blog> GetLastestBlogs()
         {
             var blogs = _blog.GetLastestBlogs();
-            if (blogs.Any() && blogs.Count >= 3)
+            if (blogs.Any() && blogs.Count >= 4)
             {
-                return blogs.Take(3).ToList();
+                return blogs.Take(4).ToList();
             }
 
             return blogs;
@@ -290,9 +290,9 @@ namespace Application.Services
         public List<Video> GetLastestVideos()
         {
             var video = _blog.GetLastestVideos();
-            if (video.Any() && video.Count >= 3)
+            if (video.Any() && video.Count >= 4)
             {
-                return video.Take(3).ToList();
+                return video.Take(4).ToList();
             }
 
             return video;
@@ -377,7 +377,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", blog.BlogImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 200);
+                imgResizer.Image_resize(imagePath, thumbPath, 400);
             }
 
             _blog.UpdateBlog(blog);
@@ -432,7 +432,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Blog/thumb", video.VideoImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 200);
+                imgResizer.Image_resize(imagePath, thumbPath, 400);
             }
 
             if (demoUp != null)
