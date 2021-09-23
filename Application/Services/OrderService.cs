@@ -18,6 +18,14 @@ namespace Application.Services
             _order = order;
         }
 
+        public void AddOneMoreProductToTheShopCart(int orderid, int productid)
+        {
+            OrderDetails orderDetails = _order.AddOneMoreProductToTheShopCart(orderid , productid);
+            orderDetails.Count = orderDetails.Count + 1;
+
+            _order.UpdateOrderDetail(orderDetails);
+        }
+
         public int AddOrderToTheShopCart(int userid)
         {
             Orders order = new Orders()
@@ -32,6 +40,44 @@ namespace Application.Services
             return order.OrderId;
         }
 
+        public void AddProductToOrderDetail(int OrderID, int ProductID, decimal Price)
+        {
+            OrderDetails orderDetails = new OrderDetails()
+            {
+                OrderID = OrderID,
+                ProductID = ProductID,
+                Price = Price,
+                Count = 1
+            };
+
+            _order.AddOrderDetails(orderDetails);
+        }
+
+        public bool CheckForProductCount(int Orderid)
+        {
+            List<OrderDetails> orderDetails = GetAllOrderDetailsByOrderID(Orderid);
+
+            bool result = false;
+
+            foreach (var item in orderDetails)
+            {
+                int productCount = item.Product.ProductCount;
+                int OrderdetailsCount = item.Count;
+
+                if (OrderdetailsCount > productCount)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        public List<OrderDetails> GetAllOrderDetailsByOrderID(int orderid)
+        {
+            return _order.GetAllOrderDetailsByOrderID(orderid);
+        }
+
         public List<Orders> GetAllOrdersForShowInAdminPanel()
         {
             return _order.GetAllOrdersForShowInAdminPanel();
@@ -40,6 +86,11 @@ namespace Application.Services
         public Orders GetOrderByOrderID(int orderid)
         {
             return _order.GetOrderByOrderID(orderid);
+        }
+
+        public OrderDetails GetOrderDetailByID(int orderdetailid)
+        {
+            return _order.GetOrderDetailByID(orderdetailid);
         }
 
         public Orders GetOrderForShopCart(int userid)
@@ -71,6 +122,11 @@ namespace Application.Services
             return false;
         }
 
+        public bool IsExistOrderDetailFromUserFromToday(int orderid, int productid)
+        {
+            return _order.IsExistOrderDetailFromUserFromToday( orderid,  productid);
+        }
+
         public bool IsExistOrderFromUserFromToday(int userid)
         {
             return _order.IsExistOrderFromUserFromToday(userid);
@@ -81,6 +137,29 @@ namespace Application.Services
             orders.IsFinally = true;
 
             _order.UpdateOrder(orders);
+        }
+
+        public void MinusProductToTheOrderDetails(int orderdetailid)
+        {
+            OrderDetails orderDetails = _order.GetOrderDetailByID(orderdetailid);
+            orderDetails.Count = orderDetails.Count - 1;
+
+            _order.UpdateOrderDetail(orderDetails);
+        }
+
+        public void PlusProductToTheOrderDetails(int orderdetailid)
+        {
+            OrderDetails orderDetails = _order.GetOrderDetailByID(orderdetailid);
+            orderDetails.Count = orderDetails.Count + 1;
+
+            _order.UpdateOrderDetail(orderDetails);
+        }
+
+        public void RemoveProductFromShopCart(int orderdetailid)
+        {
+            OrderDetails orderDetails = _order.GetOrderDetailByID(orderdetailid);
+
+            _order.RemoveProductFromShopCart(orderDetails);
         }
 
         public Orders UpdateOrderByLocationid(Orders orders, int locationid)

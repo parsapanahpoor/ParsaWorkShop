@@ -26,5 +26,21 @@ namespace Application.Interfaces
         List<Orders> GetOrdersByUsersId(int userid);
 
         #endregion
+
+
+        #region OrderDetails
+
+        bool IsExistOrderDetailFromUserFromToday(int orderid, int productid);
+        void AddOneMoreProductToTheShopCart(int orderid, int productid);
+        void AddProductToOrderDetail(int OrderID, int ProductID, decimal Price);
+        List<OrderDetails> GetAllOrderDetailsByOrderID(int orderid);
+        bool CheckForProductCount(int Orderid);
+        void RemoveProductFromShopCart(int orderdetailid);
+        void PlusProductToTheOrderDetails(int orderdetailid);
+        void MinusProductToTheOrderDetails(int orderdetailid);
+        OrderDetails GetOrderDetailByID(int orderdetailid);
+
+
+        #endregion
     }
 }

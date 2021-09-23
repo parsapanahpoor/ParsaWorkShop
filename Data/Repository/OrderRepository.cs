@@ -19,14 +19,15 @@ namespace Data.Repository
             _context = context;
         }
 
-        public void AddOneMoreProductToTheShopCart(int orderid, int productid)
+        public OrderDetails AddOneMoreProductToTheShopCart(int orderid, int productid)
         {
-            throw new NotImplementedException();
+            return _context.OrderDetails.SingleOrDefault(p => p.OrderID == orderid && p.ProductID == productid);
         }
 
         public void AddOrderDetails(OrderDetails orderDetails)
         {
-            throw new NotImplementedException();
+            _context.OrderDetails.Add(orderDetails);
+            SaveChanges();
         }
 
         public void AddOrderToTheShopCart(Orders orders)
@@ -35,19 +36,10 @@ namespace Data.Repository
             SaveChanges();
         }
 
-        public void AddProductToOrderDetail(int OrderID, int ProductID, decimal Price)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CheckForProductCount(int Orderid)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<OrderDetails> GetAllOrderDetailsByOrderID(int orderid)
         {
-            throw new NotImplementedException();
+            return _context.OrderDetails.Where(p => p.OrderID == orderid)
+                                        .Include(p => p.Product).ToList();            
         }
 
         public List<Orders> GetAllOrdersForShowInAdminPanel()
@@ -63,14 +55,14 @@ namespace Data.Repository
 
         public OrderDetails GetOrderDetailByID(int orderdetailid)
         {
-            throw new NotImplementedException();
+            return _context.OrderDetails.Find(orderdetailid);
         }
 
         public Orders GetOrderForShopCart(int userid)
         {
             return _context.Orders.SingleOrDefault(p => p.Userid == userid && p.CreateDate.Year == DateTime.Now.Year
-                                   && p.CreateDate.Month == DateTime.Now.Month&& p.CreateDate.Day == DateTime.Now.Day                                                  
-                                   && p.IsFinally == false);                                                  
+                                   && p.CreateDate.Month == DateTime.Now.Month && p.CreateDate.Day == DateTime.Now.Day
+                                   && p.IsFinally == false);
         }
 
         public List<Orders> GetOrdersByUsersId(int userid)
@@ -98,29 +90,20 @@ namespace Data.Repository
 
         public bool IsExistOrderDetailFromUserFromToday(int orderid, int productid)
         {
-            throw new NotImplementedException();
+            return _context.OrderDetails.Any(p => p.OrderID == orderid && p.ProductID == productid);
         }
 
         public bool IsExistOrderFromUserFromToday(int userid)
         {
             return _context.Orders.Any(p => p.Userid == userid && p.CreateDate.Year == DateTime.Now.Year
-                                   && p.CreateDate.Month == DateTime.Now.Month&& p.CreateDate.Day == DateTime.Now.Day                                       
-                                   && p.IsFinally == false);                                       
+                                   && p.CreateDate.Month == DateTime.Now.Month && p.CreateDate.Day == DateTime.Now.Day
+                                   && p.IsFinally == false);
         }
 
-        public void MinusProductToTheOrderDetails(int orderdetailid)
+        public void RemoveProductFromShopCart(OrderDetails orderDetails)
         {
-            throw new NotImplementedException();
-        }
-
-        public void PlusProductToTheOrderDetails(int orderdetailid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveProductFromShopCart(int orderdetailid)
-        {
-            throw new NotImplementedException();
+            _context.OrderDetails.Remove(orderDetails);
+            SaveChanges();
         }
 
         public void SaveChanges()
@@ -142,7 +125,8 @@ namespace Data.Repository
 
         public void UpdateOrderDetail(OrderDetails orderDetails)
         {
-            throw new NotImplementedException();
+            _context.OrderDetails.Update(orderDetails);
+            SaveChanges();
         }
     }
 }

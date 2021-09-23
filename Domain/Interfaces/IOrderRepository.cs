@@ -10,6 +10,7 @@ namespace Domain.Interfaces
 {
     public interface IOrderRepository
     {
+
         #region Order
         void UpdateOrder(Orders orders);
         bool IsExistOrderFromUserFromToday(int userid);
@@ -28,15 +29,11 @@ namespace Domain.Interfaces
         #region OrderDetails
 
         bool IsExistOrderDetailFromUserFromToday(int orderid, int productid);
-        void AddOneMoreProductToTheShopCart(int orderid, int productid);
+        OrderDetails AddOneMoreProductToTheShopCart(int orderid, int productid);
         void UpdateOrderDetail(OrderDetails orderDetails);
-        void AddProductToOrderDetail(int OrderID, int ProductID, decimal Price);
         void AddOrderDetails(OrderDetails orderDetails);
         List<OrderDetails> GetAllOrderDetailsByOrderID(int orderid);
-        bool CheckForProductCount(int Orderid);
-        void RemoveProductFromShopCart(int orderdetailid);
-        void PlusProductToTheOrderDetails(int orderdetailid);
-        void MinusProductToTheOrderDetails(int orderdetailid);
+        void RemoveProductFromShopCart(OrderDetails orderDetails);
         OrderDetails GetOrderDetailByID(int orderdetailid);
         void SaveChanges();
 
