@@ -20,11 +20,13 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
         #region Ctor
         private IProductService _product;
         private IUserService _user;
+        private ICommentService _comment;
 
-        public ProductsController(IProductService product, IUserService user)
+        public ProductsController(IProductService product, IUserService user , ICommentService comment)
         {
             _product = product;
             _user = user;
+            _comment = comment;
         }
         #endregion
 
@@ -193,5 +195,44 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
 
             return RedirectToAction("Gallery", new { id = product.ProductID });
         }
+
+
+        #region BlogComments
+
+        public IActionResult ShowProductsComments(bool Delete = false)
+        {
+            ViewData["Delete"] = Delete;
+
+            return View(_comment.GetAllProductsComments());
+        }
+
+        public IActionResult CommentDetails(int commenid)
+        {
+            var comment = _comment.GetCommentById(commenid);
+
+            return View(comment);
+        }
+
+        public IActionResult DeleteComment(int id)
+        {
+            _comment.DeleteComment(id);
+
+            return Redirect("/Admin/Products/ShowProductComments?Delete=true");
+        }
+
+        public IActionResult DeletedComments()
+        {
+            return View(_comment.DeletedComments());
+        }
+
+        public IActionResult ShowProductComments(int productid)
+        {
+            var product = _product.GetProductByID(productid);
+            ViewData["ProductImageName"] = product.ProductImageName;
+            return View(_comment.GetCommentByBlogId(productid));
+        }
+
+        #endregion
+
     }
 }

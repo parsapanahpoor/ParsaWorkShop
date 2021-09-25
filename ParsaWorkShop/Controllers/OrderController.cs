@@ -162,5 +162,73 @@ namespace ParsaWorkShop.Controllers
 
             return View();
         }
+        public IActionResult Payment(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Orders order = _order.GetOrderByOrderID((int)id);
+            List<OrderDetails> orderDetails = _order.GetAllOrderDetailsByOrderID(order.OrderId);
+            int Amount = 0;
+
+            foreach (var item in orderDetails)
+            {
+                Amount = Amount + (int)(item.Price * item.Count);
+            }
+
+            #region Online Payment
+
+            var payment = new ZarinpalSandbox.Payment((int)Amount);
+
+            var res = payment.PaymentRequest("پرداخت  ", "https://localhost:44334/OnlinePayment/" + order.OrderId, "Parsapanahpoor@yahoo.com", "09117878804");
+
+            if (res.Result.Status == 100)
+            {
+                return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
+            }
+
+            #endregion
+
+            return View();
+        }
+
+        [Route("OnlinePayment/{id}")]
+        public IActionResult onlinePayment(int id)
+        {
+            if (HttpContext.Request.Query["Status"] != "" &&
+                HttpContext.Request.Query["Status"].ToString().ToLower() == "ok"
+                && HttpContext.Request.Query["Authority"] != "")
+            {
+                string authority = HttpContext.Request.Query["Authority"];
+
+                Orders order = _order.GetOrderByOrderID(id);
+                List<OrderDetails> orderDetails = _order.GetAllOrderDetailsByOrderID(id);
+
+                int Amount = 0;
+
+                foreach (var item in orderDetails)
+                {
+                    Amount = Amount + (int)(item.Price * item.Count);
+                }
+
+                var payment = new ZarinpalSandbox.Payment(Amount);
+                var res = payment.Verification(authority).Result;
+                if (res.Status == 100)
+                {
+                    ViewBag.code = res.RefId;
+                    ViewBag.IsSuccess = true;
+                    _order.IsfinallyForOredr(order);
+                    _financial.AddFinancialTransactionAfterPaymentOrder(order.OrderId, Amount, "", "");
+
+                    foreach (var item in orderDetails)
+                    {
+                        _product.MinusProductCountAfterSale(item.ProductID, item.Count);
+                    }
+                }
+            }
+
+            return View();
+        }
     }
 }

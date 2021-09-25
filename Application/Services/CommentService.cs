@@ -46,6 +46,11 @@ namespace Application.Services
             return _comment.GetAllBlogsComments();
         }
 
+        public List<Comment> GetAllProductsComments()
+        {
+            return _comment.GetAllProductsComments();
+        }
+
         public List<Comment> GetAllVideosComments()
         {
             return _comment.GetAllVideosComments();
@@ -76,6 +81,11 @@ namespace Application.Services
         public Comment GetCommentById(int id)
         {
             return _comment.GetCommentById(id);
+        }
+
+        public List<Comment> GetCommentByPRoductId(int id)
+        {
+            return _comment.GetCommentByProductId(id);
         }
 
         public List<Comment> GetCommentByVideoId(int id)

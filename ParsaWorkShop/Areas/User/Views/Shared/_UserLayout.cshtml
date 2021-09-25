@@ -30,16 +30,54 @@
 
 <body>
 
-    <header id="topnav" class="defaultscroll sticky">
+    <header id="topnav" class="defaultscroll sticky bg-white">
         <div class="container">
             <!-- Logo container-->
             <div>
                 <a class="logo" href="index.html">
-                    <img src="/Landrick/images/logo-dark.png" class="l-dark" height="24" alt="">
-                    <img src="/Landrick/images/logo-light.png" class="l-light" height="24" alt="">
+                    <img src="/Landrick/images/freedom.png" class="bg-black" style="border-radius:10%" height="24" alt="">
                 </a>
             </div>
+            <ul class="buy-button list-inline mb-0">
 
+
+                <li class="list-inline-item mb-0 pe-1">
+                    <div class="dropdown">
+                        <a href="/order/ShopCart" class="btn btn-icon btn-primary dropdown-toggle" aria-haspopup="true" aria-expanded="false"><i class="uil uil-shopping-cart align-middle icons"></i></a>
+
+                    </div>
+                </li>
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="list-inline-item mb-0">
+                        <div class="dropdown dropdown-primary">
+                            <button type="button" class="btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-user align-middle icons"></i></button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-3" style="width: 200px;">
+                                <a class="dropdown-item text-dark " href="#"><i class="uil uil-user align-middle me-1"></i>  @User.Identity.Name   </a>
+                                <a class="dropdown-item text-dark" asp-action="ManageUserForLogin" asp-controller="Account"><i class="uil uil-user align-middle me-1"></i>  ورود به حساب </a>
+                                <div class="dropdown-divider my-3 border-top"></div>
+                                <a class="dropdown-item text-dark" asp-action="Logout" asp-controller="Account"><i class="uil uil-sign-out-alt align-middle me-1"></i> خروج </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="list-inline-item mb-0">
+                        <div class="dropdown dropdown-primary">
+                            <button type="button" class="btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-user align-middle icons"></i></button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-3" style="width: 200px;">
+                                <a class="dropdown-item text-dark" asp-action="Register" asp-controller="Account"><i class="uil uil-user align-middle me-1"></i>  ثبت نام  </a>
+                                <div class="dropdown-divider my-3 border-top"></div>
+                                <a class="dropdown-item text-dark" asp-action="Login" asp-controller="Account"><i class="uil uil-user align-middle me-1"></i> ورود </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+            </ul><!--end login button-->
             <!-- End Logo container-->
             <div class="menu-extras">
                 <div class="menu-item">
@@ -57,18 +95,19 @@
 
             <div id="navigation">
                 <!-- Navigation Menu-->
-                <ul class="navigation-menu nav-light">
-                    <li><a href="index.html" class="sub-menu-item">صفحه اصلی </a></li>
+                <ul class="navigation-menu">
+                    <li><a href="/" class="sub-menu-item">صفحه اصلی </a></li>
 
-                    <li class="has-submenu parent-menu-item">
-                        <a href="javascript:void(0)">اسناد </a><span class="menu-arrow"></span>
-                        <ul class="submenu">
-                            <li><a href="documentation.html" class="sub-menu-item">مستند </a></li>
-                            <li><a href="changelog.html" class="sub-menu-item">تغییرات </a></li>
-                            <li><a href="components.html" class="sub-menu-item">اجزاء </a></li>
-                            <li><a href="widget.html" class="sub-menu-item">ابزارک </a></li>
-                        </ul>
-                    </li>
+                    @await Component.InvokeAsync("ProductCategriesForMenuComponent")
+                    @await Component.InvokeAsync("BlogCategriesForMenuComponent")
+                    @await Component.InvokeAsync("VideosCategriesForMenuComponent")
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="sub-menu-item">@User.Identity.Name خوش آمدید  </a></li>
+                    }
+
                 </ul><!--end navigation menu-->
 
             </div><!--end navigation-->

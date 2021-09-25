@@ -50,6 +50,13 @@ namespace Data.Repository
                             .OrderByDescending(p => p.CreateDate).ToList();               
         }
 
+        public List<Comment> GetAllProductsComments()
+        {
+            return _context.Comment.Where(p => p.ProductTypeId == 1).Include(p=>p.Product)
+                                        .Include(p => p.Users).Include(p => p.Blog)
+                                        .OrderByDescending(p => p.CreateDate).ToList();
+        }
+
         public List<Comment> GetAllVideosComments()
         {
             return _context.Comment.Where(p => p.ProductTypeId == 3)
@@ -72,9 +79,16 @@ namespace Data.Repository
 
         public Comment GetCommentById(int id)
         {
-            return _context.Comment.Where(p => p.CommentId == id)
+            return _context.Comment.Where(p => p.CommentId == id).Include(p=>p.Product)
                             .Include(p => p.Blog).Include(p => p.Video).Include(p => p.Users)                
                              .First();               
+        }
+
+        public List<Comment> GetCommentByProductId(int id)
+        {
+            var comments = _context.Comment.Where(p => p.ProductID == id).Include(p => p.Users)
+                                               .Include(p => p.Product).OrderByDescending(p => p.CreateDate).ToList();
+            return comments;
         }
 
         public List<Comment> GetCommentByVideoId(int id)

@@ -18,6 +18,7 @@ namespace Application.Interfaces
         #region AdminPanel
 
         List<Comment> GetAllBlogsComments();
+        List<Comment> GetAllProductsComments();
         List<Comment> GetAllVideosComments();
         Comment GetCommentById(int id);
         void UpdateComment(Comment comment);
@@ -25,6 +26,7 @@ namespace Application.Interfaces
         List<Comment> DeletedComments();
         List<Comment> DeletedVideoComments();
         List<Comment> GetCommentByBlogId(int id);
+        List<Comment> GetCommentByPRoductId(int id);
         List<Comment> GetCommentByVideoId(int id);
 
         #endregion

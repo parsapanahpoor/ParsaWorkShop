@@ -1,8 +1,8 @@
-﻿
-@model IEnumerable<Domain.Models.Comment.Comment>
+﻿@model List<Domain.Models.Order.OrderDetails>
 @using Application.Convertors
+
 @{
-    ViewData["Title"] = "مدیریت کامنت ها ";
+    ViewData["Title"] = "برسی ریز فاکتور ";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -16,17 +16,18 @@
 
 
 <div class="content-wrapper" style="min-height: 805px;">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>جداول کامنت های حذف شده   </h1>
+                    <h1>برسی ریز فاکتور </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="/Admin">خانه</a></li>
-                        <li class="breadcrumb-item active">میدیرت کامنت  های حذف شده  </li>
+                        <li class="breadcrumb-item active"> برسی ریز فاکتور </li>
                     </ol>
                 </div>
             </div>
@@ -41,8 +42,7 @@
 
                 <div class="card ">
                     <div class="card-header">
-                        <h3 class="card-title">لیست کامنت های حذف شده   جستجوی پیشرفته</h3>
-
+                       
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -51,14 +51,20 @@
                                 <table id="example1" class="table table-bordered table-striped dataTable" role="grid">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 10px;" aria-label="تصویر: activate to sort column ascending">تصویر </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 150px;" aria-label="تصویر: activate to sort column ascending">تصویر </th>
 
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:10px;" aria-label="عکس  : activate to sort column ascending">عکس  </th>
-
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:80.317px;" aria-label="نویسنده: activate to sort column ascending">نویسنده </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:500px" aria-label="متن: activate to sort column ascending">متن </th>
-
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 50px;" aria-label="تاریخ ایجاد    : activate to sort column ascending"> تاریخ ایجاد  </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" عنوان محصول   : activate to sort column descending">
+                                                عنوان محصول
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" عنوان محصول   : activate to sort column descending">
+                                                قیمت
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" عنوان محصول   : activate to sort column descending">
+                                                تعداد خریداری شده
+                                            </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" عنوان محصول   : activate to sort column descending">
+                                                تاریخ افزودن این محصول 
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,23 +73,12 @@
                                         {
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1">
-                                                    <img src="/Images/Blog/thumb/@item.Blog.BlogImageName" style="height:70px; width:110px;" class="thumbnail" />
+                                                    <img src="/Images/Product/thumb/@item.Product.ProductImageName" style="height:120px;width:180px;" class="thumbnail" />
                                                 </td>
-
-                                                <td class="sorting_1">
-                                                    <img class="direct-chat-img" style="width:50px;height:50px;" src="/Images/UserAvatar/@item.Users.UserAvatar" alt="message user image">
-                                                </td>
-                                                <td>
-
-                                                    <p>@item.Users.UserName</p>
-
-
-                                                </td>
-
-                                                <td>@item.CommentBody</td>
-                                                <td>@item.CreateDate.ToShamsi()</td>
-                                           
-
+                                                <td>@item.Product.ProductTitle</td>
+                                                <td>@item.Price.ToString("#,0") تومان </td>
+                                                <td>@item.Count</td>
+                                                <td>@item.Product.CreateDate.ToShamsi()</td>
 
                                             </tr>
                                         }
@@ -142,7 +137,6 @@
                 "ordering": true,
                 "autoWidth": false
             });
-        });
-    </script>
+        });</script>
 }
 

@@ -30,6 +30,7 @@ namespace Domain.Interfaces
         #region PanelAdmin
 
         List<Comment> GetAllBlogsComments();
+        List<Comment> GetAllProductsComments();
 
         List<Comment> GetAllVideosComments();
 
@@ -42,6 +43,7 @@ namespace Domain.Interfaces
         List<Comment> DeletedVideoComments();
 
         List<Comment> GetCommentByBlogId(int id);
+        List<Comment> GetCommentByProductId(int id);
 
         List<Comment> GetCommentByVideoId(int id);
 

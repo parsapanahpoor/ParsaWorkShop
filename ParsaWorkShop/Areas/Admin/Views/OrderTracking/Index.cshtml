@@ -1,10 +1,11 @@
-﻿
-@model IEnumerable<Domain.Models.Comment.Comment>
+﻿@model List<Domain.Models.Order.Orders>
 @using Application.Convertors
 @{
-    ViewData["Title"] = "مدیریت کامنت ها ";
+    ViewData["Title"] = "پیگیری سفارشات ";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+
+
 
 @section Styls
     {
@@ -16,17 +17,18 @@
 
 
 <div class="content-wrapper" style="min-height: 805px;">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>جداول کامنت های حذف شده   </h1>
+                    <h1>پیگیری سفارشات </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="/Admin">خانه</a></li>
-                        <li class="breadcrumb-item active">میدیرت کامنت  های حذف شده  </li>
+                        <li class="breadcrumb-item active"> پیگیری سفارشات</li>
                     </ol>
                 </div>
             </div>
@@ -41,8 +43,9 @@
 
                 <div class="card ">
                     <div class="card-header">
-                        <h3 class="card-title">لیست کامنت های حذف شده   جستجوی پیشرفته</h3>
+                        <div class="card-tools">
 
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -51,14 +54,17 @@
                                 <table id="example1" class="table table-bordered table-striped dataTable" role="grid">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 10px;" aria-label="تصویر: activate to sort column ascending">تصویر </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:10px;" aria-label="عکس  : activate to sort column ascending">خریدار   </th>
 
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:10px;" aria-label="عکس  : activate to sort column ascending">عکس  </th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="نام کاربری  : activate to sort column descending">     نام مشتری</th>
 
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:80.317px;" aria-label="نویسنده: activate to sort column ascending">نویسنده </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width:500px" aria-label="متن: activate to sort column ascending">متن </th>
 
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 50px;" aria-label="تاریخ ایجاد    : activate to sort column ascending"> تاریخ ایجاد  </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending">موبایل مشتری  </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending">   تعداد انواع اقلام   </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="موبایل : activate to sort column ascending"> تاریخ  </th>
+
+
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label=" activate to sort column ascending"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,24 +73,26 @@
                                         {
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1">
-                                                    <img src="/Images/Blog/thumb/@item.Blog.BlogImageName" style="height:70px; width:110px;" class="thumbnail" />
+                                                    <img class="direct-chat-img" style="width:50px;height:50px;" src="/Images/UserAvatar/@item.User.UserAvatar" alt="message user image">
                                                 </td>
+                                                <td>@item.User.UserName</td>
+                                                <td>@item.User.PhoneNumber</td>
+                                                <td>@item.OrderDetails.Count()</td>
 
-                                                <td class="sorting_1">
-                                                    <img class="direct-chat-img" style="width:50px;height:50px;" src="/Images/UserAvatar/@item.Users.UserAvatar" alt="message user image">
-                                                </td>
+                                                <td>@item.CreateDate.ToShamsi()</td>
+
                                                 <td>
 
-                                                    <p>@item.Users.UserName</p>
-
+                                                    <a class="btn btn-outline-primary btn-sm waves-effect" asp-action="CheckUserInformation" asp-area="Admin" asp-controller="OrderTracking" asp-route-id="@item.OrderId">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                        برسی اطلاعات کاربر
+                                                    </a>
+                                                    <a class="btn btn-outline-warning btn-sm waves-effect" asp-action="CheckOrderDetails" asp-area="Admin" asp-controller="OrderTracking" asp-route-id="@item.OrderId">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                        برسی  سبد خرید 
+                                                    </a>
 
                                                 </td>
-
-                                                <td>@item.CommentBody</td>
-                                                <td>@item.CreateDate.ToShamsi()</td>
-                                           
-
-
                                             </tr>
                                         }
                                     </tbody>
@@ -142,7 +150,6 @@
                 "ordering": true,
                 "autoWidth": false
             });
-        });
-    </script>
+        });</script>
 }
 
