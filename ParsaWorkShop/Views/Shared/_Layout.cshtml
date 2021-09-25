@@ -41,7 +41,7 @@
 
                 <li class="list-inline-item mb-0 pe-1">
                     <div class="dropdown">
-                        <button type="button" class="btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-shopping-cart align-middle icons"></i></button>
+                        <a href="/order/ShopCart" class="btn btn-icon btn-primary dropdown-toggle"  aria-haspopup="true" aria-expanded="false"><i class="uil uil-shopping-cart align-middle icons"></i></a>
 
                     </div>
                 </li>
@@ -103,7 +103,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a href="index.html" class="sub-menu-item">@User.Identity.Name خوش آمدید  </a></li>
+                        <li><a  class="sub-menu-item">@User.Identity.Name خوش آمدید  </a></li>
                     }
 
                 </ul><!--end navigation menu-->
