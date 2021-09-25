@@ -278,24 +278,22 @@ namespace Application.Services
 
         public List<Blog> GetLastestBlogs()
         {
-            var blogs = _blog.GetLastestBlogs();
-            if (blogs.Any() && blogs.Count >= 4)
+            if (_blog.BlogtCount() >= 4)
             {
-                return blogs.Take(4).ToList();
+                return _blog.GetLastestBlogIndexPageUpper4();
             }
 
-            return blogs;
+            return _blog.GetLastestBlogIndexPageUnder4();
         }
 
         public List<Video> GetLastestVideos()
         {
-            var video = _blog.GetLastestVideos();
-            if (video.Any() && video.Count >= 4)
+            if (_blog.VideotCount() >= 4)
             {
-                return video.Take(4).ToList();
+                return _blog.GetLastestVideoIndexPageUpper4();
             }
 
-            return video;
+            return _blog.GetLastestVideoIndexPageUnder4();
         }
 
         public string GetUserNameByBlog(int blogid)

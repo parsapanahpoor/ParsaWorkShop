@@ -30,7 +30,9 @@ namespace Domain.Interfaces
         List<VideoSelectedCategory> GetAllVideoSelectedCategories();
         Video GetVideoById(int VideoId);
         void EditeVideoSelectedCategory(int videoid);
-
+        List<Video> GetLastestVideoIndexPageUnder4();
+        List<Video> GetLastestVideoIndexPageUpper4();
+        int VideotCount();
         #endregion
 
 
@@ -45,6 +47,9 @@ namespace Domain.Interfaces
         string GetUserNameByBlog(int blogid);
         void UpdateBlog(Blog blog);
         List<Blog> GetAllDeletedBlogs();
+        List<Blog> GetLastestBlogIndexPageUnder4();
+        List<Blog> GetLastestBlogIndexPageUpper4();
+        int BlogtCount();
 
         #endregion
 

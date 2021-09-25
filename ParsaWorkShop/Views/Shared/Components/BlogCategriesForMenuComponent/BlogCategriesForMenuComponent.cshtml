@@ -3,11 +3,11 @@
 
 
 <li class="has-submenu parent-menu-item">
-    <a href="/">اخبار و مقالات  </a><span class="menu-arrow"></span>
+    <a href="/Blog/Index">اخبار و مقالات  </a><span class="menu-arrow"></span>
     <ul class="submenu">
         @foreach (var item in Model.Where(p => p.ParentId == null))
         {
-            <li><a href="documentation.html" class="sub-menu-item">@item.CategoryTitle </a></li>
+            <li><a asp-action="Index" asp-controller="Blog" asp-route-Categroyid="@item.BlogCategoryId" class="sub-menu-item">@item.CategoryTitle </a></li>
 
         }
 

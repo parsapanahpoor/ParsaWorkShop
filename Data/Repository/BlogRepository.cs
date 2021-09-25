@@ -51,6 +51,11 @@ namespace Data.Repository
             Savechanges();
         }
 
+        public int BlogtCount()
+        {
+            return _context.product.Count();
+        }
+
         public void EditBlogSelectedCategory(int BlogId)
         {
             _context.BlogSelectedCategories.Where(p => p.BlogId == BlogId).ToList()
@@ -130,9 +135,32 @@ namespace Data.Repository
                                        .ThenInclude(p => p.Users).Select(p => p.Blog);                                             
         }
 
+        public List<Blog> GetLastestBlogIndexPageUnder4()
+        {
+            return _context.Blog.Include(p=>p.Users)
+                .OrderByDescending(p => p.CreateDate).ToList();
+        }
+
+        public List<Blog> GetLastestBlogIndexPageUpper4()
+        {
+            return _context.Blog.Include(p=>p.Users)
+                          .OrderByDescending(p => p.CreateDate).Take(4).ToList();
+        }
+
         public List<Blog> GetLastestBlogs()
         {
-            return _context.Blog.OrderByDescending(p => p.CreateDate).ToList();
+            return _context.Blog.Include(p=>p.Users)
+                      .OrderByDescending(p => p.CreateDate).ToList();
+        }
+
+        public List<Video> GetLastestVideoIndexPageUnder4()
+        {
+            return _context.Video.OrderByDescending(p => p.CreateDate).ToList();
+        }
+
+        public List<Video> GetLastestVideoIndexPageUpper4()
+        {
+            return _context.Video.OrderByDescending(p => p.CreateDate).Take(4).ToList();
         }
 
         public List<Video> GetLastestVideos()
@@ -190,6 +218,11 @@ namespace Data.Repository
             _context.Video.Update(video);
 
             Savechanges();
+        }
+
+        public int VideotCount()
+        {
+            return _context.Video.Count();
         }
 
         IQueryable<Video> IBlogRepository.GetAllVideosForIQueryable()

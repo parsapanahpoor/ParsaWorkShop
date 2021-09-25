@@ -200,12 +200,22 @@ namespace Application.Services
 
         public List<Product> GetLastestProductsIndexPage()
         {
-            if (_product.ProductCount() >= 4)
+            if (_product.ProductCount() >= 8)
             {
                 return _product.GetLastestProductsIndexPageUpper8();
             }
 
             return _product.GetLastestProductsIndexPageUnder8();
+        }
+
+        public List<Product> GetLastestProductsIndexPagefor4Product()
+        {
+            if (_product.ProductCount() >= 4)
+            {
+                return _product.GetLastestProductsIndexPageUpper4();
+            }
+
+            return _product.GetLastestProductsIndexPageUnder4();
         }
 
         public Product GetProductByID(int productid)
@@ -235,7 +245,7 @@ namespace Application.Services
 
         public Tuple<List<Product>, int> GetProductsForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0)
         {
-            if (take == 0) take = 9;
+            if (take == 0) take = 12;
 
             IQueryable<Product> products = _product.GetAllProductForIQueryAble();
 

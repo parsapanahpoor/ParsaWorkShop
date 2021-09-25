@@ -37,7 +37,7 @@
                 </a>
             </div>
             <ul class="buy-button list-inline mb-0">
-               
+
 
                 <li class="list-inline-item mb-0 pe-1">
                     <div class="dropdown">
@@ -46,7 +46,7 @@
                     </div>
                 </li>
 
-               
+
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="list-inline-item mb-0">
@@ -229,6 +229,8 @@
     <!-- Main Js -->
     <script src="/Landrick/js/plugins.init.js"></script><!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
     <script src="/Landrick/js/app.js"></script><!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
+    @RenderSection("Scripts", false)
+
 </body>
 
 </html>

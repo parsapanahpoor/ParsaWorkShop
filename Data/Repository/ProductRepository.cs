@@ -83,7 +83,7 @@ namespace Data.Repository
         public IQueryable<Product> GetAllProductForIQueryAble()
         {
             return _context.product.Include(p => p.Users).Include(p => p.ProductSelectedCategory)
-                                   .Where(p => p.IsActive).OrderByDescending(p => p.CreateDate);                         
+                                   .Where(p => p.IsActive && p.ProductCount > 0).OrderByDescending(p => p.CreateDate);                         
         }
 
         public List<Product> GetAllProducts()
@@ -106,9 +106,19 @@ namespace Data.Repository
             return _context.ProductGallery.Where(p => p.ProductID == id).ToList();
         }
 
+        public List<Product> GetLastestProductsIndexPageUnder4()
+        {
+            return _context.product.OrderByDescending(p => p.CreateDate).ToList();
+        }
+
         public List<Product> GetLastestProductsIndexPageUnder8()
         {
             return _context.product.OrderByDescending(p => p.CreateDate).ToList();
+        }
+
+        public List<Product> GetLastestProductsIndexPageUpper4()
+        {
+            return _context.product.OrderByDescending(p => p.CreateDate).Take(4).ToList();
         }
 
         public List<Product> GetLastestProductsIndexPageUpper8()

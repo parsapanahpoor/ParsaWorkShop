@@ -22,7 +22,7 @@ namespace Data.Repository
         public void AddComment(Comment comment)
         {
             _context.Comment.Add(comment);
-            Savechanges();
+            _context.SaveChanges();
         }
 
         public List<Comment> DeletedComments()

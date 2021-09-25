@@ -37,7 +37,9 @@ namespace Domain.Interfaces
         Product GetProductForShowInSingleProducPage(int id);
         bool IsExistPRoduct(int productid);
         List<Product> GetLastestProductsIndexPageUnder8();
+        List<Product> GetLastestProductsIndexPageUnder4();
         List<Product> GetLastestProductsIndexPageUpper8();
+        List<Product> GetLastestProductsIndexPageUpper4();
         int ProductCount();
 
         #endregion

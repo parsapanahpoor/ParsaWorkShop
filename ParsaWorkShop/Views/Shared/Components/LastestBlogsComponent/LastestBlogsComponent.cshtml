@@ -2,7 +2,7 @@
 @using Application.Convertors
 
 <div class="container mt-100 mt-60">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-12">
             <h5 class="mb-0">اخبار و مقالات جدید   </h5>
         </div><!--end col-->
@@ -11,26 +11,27 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
-                <div class="card shop-list border-0 position-relative">
-                    <ul class="label list-unstyled mb-0">
-                        <li><a href="/" class="badge badge-link rounded-pill bg-warning">جدید  </a></li>
-                    </ul>
-                    <div class="shop-image position-relative overflow-hidden rounded shadow">
-                        <a href="/"> <img src="/Images/Blog/thumb/@item.BlogImageName" style="width:261px;height:250px;" class="img-fluid" alt=""></a>
-                      
-                      
-                    </div>
-                    <div class="card-body content pt-4 p-2">
-                        <a href="shop-product-detail.html" class="text-dark product-name h6"> @item.BlogTitle</a>
-                        <div class="d-flex justify-content-between mt-1">
-                            <h6 class="text-muted small fst-italic mb-0 mt-1">@item.ShortDescription  </h6>
-                          
-                        </div>
-                    </div>
+    <div class="col-lg-3 col-md-6 mb-4 pb-2">
+        <div class="card blog rounded border-0 shadow overflow-hidden" style="width:261px;height:360px;">
+            <div class="position-relative">
+                <img src="/Images/Blog/thumb/@item.BlogImageName"  class="card-img-top" alt="...">
+                <div class="overlay rounded-top bg-dark"></div>
+            </div>
+            <div class="card-body content">
+                <h5><a href="/Blog/SingleBlogsPage/@item.BlogId" class="card-title title text-dark">@item.BlogTitle</a></h5>
+                <h6 class="text-muted small fst-italic mb-0 mt-1">@item.ShortDescription  </h6>
+                <div class="post-meta d-flex justify-content-between mt-3">
+                    <a href="/Blog/SingleBlogsPage/@item.BlogId" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
                 </div>
-            </div><!--end col-->
-                        }
+            </div>
+            <div class="author">
+                <small class="text-light user d-block"><i class="uil uil-user"></i>  @item.Users.UserName</small>
+                <small class="text-light date"><i class="uil uil-calendar-alt"></i>  @item.CreateDate.ToShamsi()</small>
+            </div>
+        </div>
+    </div>
+
+<!--end col-->}
 
     </div><!--end row-->
 </div>
