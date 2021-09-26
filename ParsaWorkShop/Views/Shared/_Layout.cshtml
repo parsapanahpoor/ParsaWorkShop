@@ -15,15 +15,15 @@
     <!-- favicon -->
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Bootstrap -->
-    <link href="/Landrick/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Landrick/css/bootstrap.min.css" rel="stylesheet" type="text/css" async />
     <!-- Slider -->
-    <link rel="stylesheet" href="/Landrick/css/tiny-slider.css" />
+    <link rel="stylesheet" href="/Landrick/css/tiny-slider.css"  async />
     <!-- Icons -->
-    <link href="/Landrick/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/Landrick/unicons.iconscout.com/release/v3.0.6/css/line.css">
+    <link href="/Landrick/css/materialdesignicons.min.css" rel="stylesheet" type="text/css"  async />
+    <link rel="stylesheet" href="/Landrick/unicons.iconscout.com/release/v3.0.6/css/line.css" async >
     <!-- Main Css -->
-    <link href="/Landrick/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-    <link href="/Landrick/css/colors/default.css" rel="stylesheet" id="color-opt">
+    <link href="/Landrick/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt"  async />
+    <link href="/Landrick/css/colors/default.css" rel="stylesheet" id="color-opt" async >
 </head>
 
 <body>
@@ -31,17 +31,13 @@
     <header id="topnav" class="defaultscroll sticky">
         <div class="container">
             <!-- Logo container-->
-            <div>
-                <a class="logo" href="index.html">
-                    <img src="/Landrick/images/freedom.png" class="bg-black" style="border-radius:10%" height="24" alt="">
-                </a>
-            </div>
+
             <ul class="buy-button list-inline mb-0">
 
 
                 <li class="list-inline-item mb-0 pe-1">
                     <div class="dropdown">
-                        <a href="/order/ShopCart" class="btn btn-icon btn-primary dropdown-toggle"  aria-haspopup="true" aria-expanded="false"><i class="uil uil-shopping-cart align-middle icons"></i></a>
+                        <a href="/order/ShopCart" class="btn btn-icon btn-primary dropdown-toggle" aria-haspopup="true" aria-expanded="false"><i class="uil uil-shopping-cart align-middle icons"></i></a>
 
                     </div>
                 </li>
@@ -49,7 +45,7 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li class="list-inline-item mb-0">
+                    <li class="list-inline-item mb-0 ">
                         <div class="dropdown dropdown-primary">
                             <button type="button" class="btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-user align-middle icons"></i></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 py-3" style="width: 200px;">
@@ -95,15 +91,20 @@
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu">
                     <li><a href="/" class="sub-menu-item">صفحه اصلی </a></li>
-
-                    @await Component.InvokeAsync("ProductCategriesForMenuComponent")
-                    @await Component.InvokeAsync("BlogCategriesForMenuComponent")
-                    @await Component.InvokeAsync("VideosCategriesForMenuComponent")
+                    <cache expires-after="@TimeSpan.FromDays(1)">
+                        @await Component.InvokeAsync("ProductCategriesForMenuComponent")
+                    </cache>
+                    <cache expires-after="@TimeSpan.FromDays(1)">
+                        @await Component.InvokeAsync("BlogCategriesForMenuComponent")
+                    </cache>
+                    <cache expires-after="@TimeSpan.FromDays(1)">
+                        @await Component.InvokeAsync("VideosCategriesForMenuComponent")
+                    </cache>
 
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a  class="sub-menu-item">@User.Identity.Name خوش آمدید  </a></li>
+                        <li><a class="sub-menu-item">@User.Identity.Name خوش آمدید  </a></li>
                     }
 
                 </ul><!--end navigation menu-->
@@ -123,10 +124,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
-                    <a href="#" class="logo-footer">
-                        <img src="/Landrick/images/logo-light.png" height="24" alt="">
-                    </a>
-                    <p class="mt-4">کار با لنـدریــک را شروع کنید که می تواند همه چیزهایی را که برای ایجاد آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                    
+                    <p class="mt-4">فروشگاه پارسا پناهپور </p>
                     <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
                         <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
                         <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
@@ -138,77 +137,36 @@
                 <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <h5 class="text-light footer-head">شرکت </h5>
                     <ul class="list-unstyled footer-list mt-4">
-                        <li><a href="page-aboutus.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
-                        <li><a href="page-services.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات </a></li>
-                        <li><a href="page-team.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تیم </a></li>
-                        <li><a href="page-pricing.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> قیمت گذاری </a></li>
-                        <li><a href="page-portfolio-modern.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> پروژه </a></li>
-                        <li><a href="page-jobs.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مشاغل </a></li>
-                        <li><a href="page-blog-grid.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> وبلاگ </a></li>
-                        <li><a href="auth-cover-login.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> ورود </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تیم </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> قیمت گذاری </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> پروژه </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مشاغل </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> وبلاگ </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> ورود </a></li>
                     </ul>
                 </div><!--end col-->
 
                 <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <h5 class="text-light footer-head">لینک های مفید </h5>
                     <ul class="list-unstyled footer-list mt-4">
-                        <li><a href="page-terms.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات سایت </a></li>
-                        <li><a href="page-privacy.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> حریم خصوصی </a></li>
-                        <li><a href="documentation.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مستند </a></li>
-                        <li><a href="changelog.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تغییرات </a></li>
-                        <li><a href="components.html" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> اجزاء </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات سایت </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> حریم خصوصی </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مستند </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تغییرات </a></li>
+                        <li><a href="/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> اجزاء </a></li>
                     </ul>
                 </div><!--end col-->
 
                 <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <h5 class="text-light footer-head">خبرنامه </h5>
                     <p class="mt-4">ثبت نام کنید و آخرین نکات را از طریق ایمیل دریافت کنید.</p>
-                    <form>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="foot-subscribe mb-3">
-                                    <label class="form-label">ایمیل خود را بنویسید <span class="text-danger">*</span></label>
-                                    <div class="form-icon position-relative">
-                                        <i data-feather="mail" class="fea icon-sm icons"></i>
-                                        <input type="email" name="email" id="emailsubscribe" class="form-control ps-5 rounded" placeholder="ایمیل شما: " required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="d-grid">
-                                    <input type="submit" id="submitsubscribe" name="send" class="btn btn-soft-primary" value="خبرنامه">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div><!--end col-->
             </div><!--end row-->
         </div><!--end container-->
     </footer><!--end footer-->
-    <footer class="footer footer-bar">
-        <div class="container text-center">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <div class="text-sm-start">
-                        <p class="mb-0">
-                            ©
-                            <script>document.write(new Date().getFullYear())</script> لنـدریــک. طراحی شده با  <i class="mdi mdi-heart text-danger"></i> توسط  <a href="https://www.rtl-theme.com/author/tn_plugin/" target="_blank" class="text-reset">جعفر عباسی </a>.
-                        </p>
-                    </div>
-                </div><!--end col-->
-
-                <div class="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                    <ul class="list-unstyled text-sm-end mb-0">
-                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/american-ex.png" class="avatar avatar-ex-sm" title="آمریکن اکسپرس" alt=""></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/discover.png" class="avatar avatar-ex-sm" title="کشف کردن" alt=""></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/master-card.png" class="avatar avatar-ex-sm" title="مستر کارت" alt=""></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/paypal.png" class="avatar avatar-ex-sm" title="پی پال" alt=""></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)"><img src="/Landrick/images/payments/visa.png" class="avatar avatar-ex-sm" title="ویزا" alt=""></a></li>
-                    </ul>
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!--end container-->
-    </footer><!--end footer-->
+    <!-- Footer End -->
     <!-- Footer End -->
     <!-- Product View Start -->
     <!-- Product View End -->
@@ -219,16 +177,16 @@
     <!-- Back to top -->
     <!-- end Style switcher -->
     <!-- javascript -->
-    <script src="/Landrick/js/bootstrap.bundle.min.js"></script>
+    <script src="/Landrick/js/bootstrap.bundle.min.js"  async ></script>
     <!-- SLIDER -->
-    <script src="/Landrick/js/tiny-slider.js"></script>
+    <script src="/Landrick/js/tiny-slider.js"  async ></script>
     <!-- Icons -->
-    <script src="/Landrick/js/feather.min.js"></script>
+    <script src="/Landrick/js/feather.min.js"  async ></script>
     <!-- Switcher -->
-    <script src="/Landrick/js/switcher.js"></script>
+    <script src="/Landrick/js/switcher.js"  async ></script>
     <!-- Main Js -->
-    <script src="/Landrick/js/plugins.init.js"></script><!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
-    <script src="/Landrick/js/app.js"></script><!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
+    <script src="/Landrick/js/plugins.init.js"  async ></script><!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
+    <script src="/Landrick/js/app.js"  async ></script><!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
     @RenderSection("Scripts", false)
 
 </body>

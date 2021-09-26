@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "خانه ";
 }
 
 <section class="bg-home rtl-personal-hero bg-light d-flex align-items-center" style="background:url('/Landrick/images/personal/bg01.png') center center" id="home">
@@ -8,7 +8,7 @@
             <div class="col-lg-8 col-md-9">
                 <div class="title-heading mt-4">
                     <h1 class="display-3 fw-bold mb-3">  باما لبخند بزنید  <br>  </h1>
-                    <p class="para-desc text-muted">تمام نیاز های خودتان را از ما بخواهید </p>
+                    <p class="para-desc text-muted">تمام نیاز های خودتان را از ما بخواهید. </p>
                     <div class="mt-4 pt-2">
                         <a href="/Products" class="btn btn-primary mt-2 me-2"><i class="uil uil-camera"></i> فروشگاه    </a>
                         <a href="/Blog" class="btn btn-outline-primary mt-2"><i class="uil uil-cloud-download"></i>  اخبار و مقالات </a>
@@ -21,9 +21,9 @@
 </section>
 
 <section class="section">
-
-    @await Component.InvokeAsync("LastestProductsComponent")
-
+    <cache expires-after="@TimeSpan.FromDays(1)">
+        @await Component.InvokeAsync("LastestProductsComponent")
+    </cache>
 
 </section>
 
@@ -48,9 +48,10 @@
 
 
 <section class="section">
-
-    @await Component.InvokeAsync("LastestBlogsComponent")
-
-    @await Component.InvokeAsync("LastestVideoComponent")
-
+    <cache expires-after="@TimeSpan.FromDays(1)">
+        @await Component.InvokeAsync("LastestBlogsComponent")
+    </cache>
+    <cache expires-after="@TimeSpan.FromDays(1)">
+        @await Component.InvokeAsync("LastestVideoComponent")
+    </cache>
 </section>

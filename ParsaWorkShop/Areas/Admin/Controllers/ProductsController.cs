@@ -197,7 +197,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
         }
 
 
-        #region BlogComments
+        #region ProductsComments
 
         public IActionResult ShowProductsComments(bool Delete = false)
         {
@@ -217,7 +217,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
         {
             _comment.DeleteComment(id);
 
-            return Redirect("/Admin/Products/ShowProductComments?Delete=true");
+            return Redirect("/Admin/Products/ShowProductsComments?Delete=true");
         }
 
         public IActionResult DeletedComments()

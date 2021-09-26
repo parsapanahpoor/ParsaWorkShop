@@ -53,6 +53,11 @@ namespace Data.Repository
             return _context.Users.IgnoreQueryFilters().Where(p => p.IsDelete).ToList();
         }
 
+        public List<User> GetLAstestUserForAdminIndexPage()
+        {
+            return _context.Users.OrderByDescending(p => p.RegisterDate).Take(4).ToList();
+        }
+
         public ContactUs GetMessageById(int id)
         {
             return _context.ContactUs.Find(id);

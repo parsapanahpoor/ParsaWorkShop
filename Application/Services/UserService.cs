@@ -243,6 +243,11 @@ namespace Application.Services
             return _userRepository.GetDeleteUsers();
         }
 
+        public List<User> GetLastestUserForAdminPage()
+        {
+            return _userRepository.GetLAstestUserForAdminIndexPage();
+        }
+
         public ContactUs GetMessageById(int id)
         {
             return _userRepository.GetMessageById(id);

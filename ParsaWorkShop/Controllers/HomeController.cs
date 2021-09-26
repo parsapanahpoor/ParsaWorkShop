@@ -19,6 +19,7 @@ namespace ParsaWorkShop.Controllers
         }
         #endregion
 
+        [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Client, NoStore = false)]
         public IActionResult Index()
         {
             return View();

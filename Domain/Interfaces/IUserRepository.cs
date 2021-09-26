@@ -40,6 +40,7 @@ namespace Domain.Interfaces
 
         List<User> GetUsers();
         List<User> GetDeleteUsers();
+        List<User> GetLAstestUserForAdminIndexPage();
 
         #endregion
 

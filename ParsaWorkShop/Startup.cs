@@ -10,10 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMarkupMin.AspNetCore5;
 
 namespace ParsaWorkShop
 {
@@ -42,7 +44,7 @@ namespace ParsaWorkShop
             {
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/Logout";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(43200);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(432000);
 
             });
 
@@ -62,6 +64,19 @@ namespace ParsaWorkShop
             #region IoC
             RegisterServices(services);
             #endregion
+
+            #region WebMarkupMin
+
+            services.AddWebMarkupMin(options =>
+            {
+                options.AllowMinificationInDevelopmentEnvironment = true;
+                options.AllowCompressionInDevelopmentEnvironment = true;
+            })
+                .AddHtmlMinification()
+                .AddHttpCompression()
+                .AddXmlMinification();
+
+            #endregion
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,8 +91,17 @@ namespace ParsaWorkShop
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    const int durationInSeconds = 600 * 120 * 24;
+                    ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                        "public,max-age=" + durationInSeconds;
+                }
+            });
 
+            app.UseWebMarkupMin();
             app.UseRouting();
 
             app.UseAuthentication();

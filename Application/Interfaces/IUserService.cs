@@ -47,6 +47,7 @@ namespace Application.Interfaces
         EditUserViewModel GetUserForShowInEditMode(int userId);
         void EditUserFromAdmin(EditUserViewModel editUser);
         SideBarUserPanelViewModel GetSideBarUserPanelData(string username);
+        List<User> GetLastestUserForAdminPage();
 
         #endregion
 

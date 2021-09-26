@@ -181,7 +181,7 @@ namespace ParsaWorkShop.Controllers
 
             var payment = new ZarinpalSandbox.Payment((int)Amount);
 
-            var res = payment.PaymentRequest("پرداخت  ", "https://localhost:44334/OnlinePayment/" + order.OrderId, "Parsapanahpoor@yahoo.com", "09117878804");
+            var res = payment.PaymentRequest("پرداخت  ", "https://Parsapnrshop.ir/OnlinePayment/" + order.OrderId, "Parsapanahpoor@yahoo.com", "09117878804");
 
             if (res.Result.Status == 100)
             {
