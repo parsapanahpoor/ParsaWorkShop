@@ -83,7 +83,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Product/thumb", product.ProductImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 400);
+                imgResizer.Image_resize(imagePath, thumbPath, 320);
             }
 
             _product.AddProduct(product);
@@ -327,7 +327,7 @@ namespace Application.Services
                 ImageConvertor imgResizer = new ImageConvertor();
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images//Product/thumb", product.ProductImageName);
 
-                imgResizer.Image_resize(imagePath, thumbPath, 400);
+                imgResizer.Image_resize(imagePath, thumbPath, 320);
             }
 
             _product.UpdateProduct(product);
