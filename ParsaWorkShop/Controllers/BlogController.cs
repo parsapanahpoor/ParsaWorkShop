@@ -54,13 +54,7 @@ namespace ParsaWorkShop.Controllers
             {
                 return NotFound();
             }
-
-            comment.IsDelete = false;
-            comment.IsAdminRead = false;
-            comment.CreateDate = DateTime.Now;
-            comment.ProductTypeId = 2;
-            comment.UserId = _user.GetUserIdByUserName(User.Identity.Name);
-            _comment.AddComment(comment);
+            _comment.AddComment(comment , _user.GetUserIdByUserName(User.Identity.Name) , 2);
 
             return View("ShowComment", _comment.GetBlogComment((int)comment.BlogId));
         }
@@ -96,11 +90,8 @@ namespace ParsaWorkShop.Controllers
 
         public IActionResult CreateVideoComments(Comment comment)
         {
-            comment.IsDelete = false;
-            comment.CreateDate = DateTime.Now;
-            comment.ProductTypeId = 3;
-            comment.UserId = _user.GetUserIdByUserName(User.Identity.Name);
-            _comment.AddComment(comment);
+   
+            _comment.AddComment(comment , _user.GetUserIdByUserName(User.Identity.Name) , 3);
 
             return View("ShowCommentVideo", _comment.GetVideoComment((int)comment.VideoId));
         }

@@ -10,7 +10,7 @@ namespace Application.Interfaces
     public interface ICommentService
     {
 
-        void AddComment(Comment comment);
+        void AddComment(Comment comment , int userid , int ProductTypeId);
         Tuple<List<Comment>, int> GetBlogComment(int BlogId, int pageId = 1);
         Tuple<List<Comment>, int> GetVideoComment(int videoid, int pageId = 1);
         Tuple<List<Comment>, int> GetProductComment(int ProductId, int pageId = 1);

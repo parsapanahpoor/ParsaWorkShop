@@ -53,13 +53,7 @@ namespace ParsaWorkShop.Controllers
             {
                 return NotFound();
             }
-
-            comment.IsDelete = false;
-            comment.IsAdminRead = false;
-            comment.CreateDate = DateTime.Now;
-            comment.ProductTypeId = 1;
-            comment.UserId = _user.GetUserIdByUserName(User.Identity.Name);
-            _comment.AddComment(comment);
+            _comment.AddComment(comment , _user.GetUserIdByUserName(User.Identity.Name) , 1);
 
             return View("ShowComment", _comment.GetProductComment((int)comment.ProductID));
         }

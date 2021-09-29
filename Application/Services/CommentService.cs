@@ -18,8 +18,15 @@ namespace Application.Services
             _comment = comment;
         }
 
-        public void AddComment(Comment comment)
+        public void AddComment(Comment comment , int userid , int ProductTypeId)
         {
+
+            comment.IsDelete = false;
+            comment.IsAdminRead = false;
+            comment.CreateDate = DateTime.Now;
+            comment.ProductTypeId = ProductTypeId;
+            comment.UserId = userid;
+
             _comment.AddComment(comment);
         }
 
