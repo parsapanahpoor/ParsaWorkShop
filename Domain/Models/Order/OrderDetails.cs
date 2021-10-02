@@ -24,10 +24,13 @@ namespace Domain.Models.Order
 
         public int Count { get; set; }
 
+        public bool IsReturend { get; set; }
+
         #region Navigations
 
         public Orders Order { get; set; }
         public Product.Product Product { get; set; }
+        public List<ReturnedProducts> ReturnedProducts { get; set; }
 
         #endregion
     }

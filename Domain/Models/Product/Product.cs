@@ -42,6 +42,7 @@ namespace Domain.Models.Product
         public int ProductCount { get; set; }
 
         public decimal Price { get; set; }
+        public decimal? OldPrice { get; set; }
 
         [MaxLength(600)]
         public string Tags { get; set; }

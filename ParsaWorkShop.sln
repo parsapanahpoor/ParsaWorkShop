@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.IoC", "Infra.IoC", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E056F9F6-BD4F-411C-BCD5-6EFA23F67084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{127FEA88-E4BE-4DC8-8D86-E93439B7F244}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{127FEA88-E4BE-4DC8-8D86-E93439B7F244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6074772A-E3BC-4DE6-9009-BF194EAD6DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{6074772A-E3BC-4DE6-9009-BF194EAD6DFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{25C23E95-F404-4B94-ADB3-FE6BBF6B9A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{25C23E95-F404-4B94-ADB3-FE6BBF6B9A85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoC", "IoC\IoC.csproj", "{CADC8B9D-F76F-4D68-BF22-755C4BF19DF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoC", "IoC\IoC.csproj", "{CADC8B9D-F76F-4D68-BF22-755C4BF19DF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaWorkShop", "ParsaWorkShop\ParsaWorkShop.csproj", "{872574FB-CF21-461E-B383-752B14C788A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsaWorkShop", "ParsaWorkShop\ParsaWorkShop.csproj", "{872574FB-CF21-461E-B383-752B14C788A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

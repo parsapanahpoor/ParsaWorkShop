@@ -59,5 +59,7 @@ namespace Application.Interfaces
         ContactUs GetMessageById(int id);
 
         #endregion
+
+
     }
 }

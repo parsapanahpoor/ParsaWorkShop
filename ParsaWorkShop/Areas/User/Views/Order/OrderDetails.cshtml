@@ -10,7 +10,6 @@
     <div class="border-bottom pb-4 text-center">
 
         <h5>سفارشات</h5>
-        <!-- <p class="text-muted mb-0">من کار خود را به عنوان یک کارآموز آغاز کرده ام و خودم را اثبات می کنم و با راهنمایی خوب به همه نقاط عطف می رسم و به مدیر پروژه می رسم. در این سفر ، من تمام رویه هایی را می شناسم که من را به یک توسعه دهنده ، رهبر تیم و یک مدیر پروژه خوب تبدیل می کند.</p> -->
 
     </div>
     <div class="row">
@@ -28,6 +27,8 @@
                             <th scope="col" class="border-bottom">
                                 مبلغ پرداختی
                             </th>
+                            <th scope="col" class="border-bottom">
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,12 @@
                                 <th>@item.Product.ProductTitle</th>
                                 <td>@item.Count</td>
                                 <td>@item.Price.ToString("#,0") تومان </td>
+                                <td>
+                                    <a 
+                                       asp-action="RequestForReturnProduct" asp-area="User" asp-controller="Order" asp-route-id="@item.OrderDetailID"
+                                       class="btn btn-outline-warning btn-pills">درخواست مرجوعی</a>
+                                </td>
+
                             </tr>
                         }
 

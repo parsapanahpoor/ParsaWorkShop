@@ -10,7 +10,10 @@ namespace Application.Interfaces
     public interface IFinancialTransactionService
     {
         void AddFinancialTransactionAfterPaymentOrder(int orderid, int price, string BankReceipt, string BankTransferNumber);
+        void AddFinancialTransactionForReturendProduct(int orderid, int price, string BankReceipt, string BankTransferNumber);
         List<FinancialTransaction> GetAllFinancialTransaction();
+        decimal ReciveMoney();
+        decimal ExportMoney();
 
     }
 }

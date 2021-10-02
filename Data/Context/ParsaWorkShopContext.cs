@@ -68,7 +68,6 @@ namespace Data.Context
 
         #endregion
 
-   
         #region Product
 
         public DbSet<ProductCategories> ProductCategories { get; set; }
@@ -84,6 +83,9 @@ namespace Data.Context
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<FinancialTransaction> FinancialTransactions { get; set; }
+        public DbSet<ReturnedProducts> ReturnedProducts { get; set; }
+        public DbSet<ReturnedProductType> ReturnedProductTypes { get; set; }
+        public DbSet<FinancialTransactionType> FinancialTransactionType { get; set; }
 
         #endregion
 

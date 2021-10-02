@@ -5,10 +5,13 @@ using Application.ViewModels;
 using Domain.Interfaces;
 using Domain.Models.ContactUs;
 using Domain.Models.Users;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -95,7 +98,7 @@ namespace Application.Services
             return AddUser(addUser);
         }
 
-      
+
         public void ChangeUserPassword(string userName, string newPassword)
         {
             var user = GetUserByUserName(userName);
@@ -106,7 +109,7 @@ namespace Application.Services
         public bool CompareOldPassword(string oldPassword, string username)
         {
             string hashOldPassword = oldPassword;
-            return _userRepository.CompareOldPassword(hashOldPassword ,  username);
+            return _userRepository.CompareOldPassword(hashOldPassword, username);
         }
 
         public void DeleteUser(int userId)
@@ -213,7 +216,7 @@ namespace Application.Services
                 string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/UserAvatar/thumb", user.UserAvatar);
 
                 imgResizer.Image_resize(imagePath, thumbPath, 150);
-            } 
+            }
 
             UpdateUser(user);
         }
@@ -361,7 +364,7 @@ namespace Application.Services
         public User LoginUser(LoginViewModel login)
         {
             string PhoneNumber = FixedText.FixEmail(login.phoneNumber);
-            return _userRepository.LoginUser(PhoneNumber , login.Password);
+            return _userRepository.LoginUser(PhoneNumber, login.Password);
         }
 
         public void UpdateUser(User user)

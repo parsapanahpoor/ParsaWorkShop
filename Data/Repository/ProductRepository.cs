@@ -96,6 +96,16 @@ namespace Data.Repository
             return _context.ProductSelectedCategory.ToList();
         }
 
+        public List<Product> GetAllProductsInOffer()
+        {
+            return _context.product.Where(p => p.OldPrice != null && p.IsInOffer == true).ToList();
+        }
+
+        public List<Product> GetAllProductsNotInOffer()
+        {
+            return _context.product.Where(p => p.IsInOffer != true && p.IsInOffer == null).ToList();
+        }
+
         public ProductFeature GetFeatureById(int id)
         {
             return _context.ProductFeature.Find(id);
@@ -104,6 +114,11 @@ namespace Data.Repository
         public List<ProductGallery> GetGalleryById(int id)
         {
             return _context.ProductGallery.Where(p => p.ProductID == id).ToList();
+        }
+
+        public List<Product> GetLastestOfferProducts()
+        {
+            return _context.product.Where(p => p.IsInOffer == true).OrderByDescending(p=>p.CreateDate).Take(4).ToList();
         }
 
         public List<Product> GetLastestProductsIndexPageUnder4()

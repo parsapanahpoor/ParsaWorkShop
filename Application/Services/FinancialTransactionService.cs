@@ -25,16 +25,41 @@ namespace Application.Services
                 Price = price,
                 BankReceipt = BankReceipt,
                 BankTransferNumber = BankTransferNumber,
-                CreateDate = DateTime.Now
+                CreateDate = DateTime.Now,
+                FinancialTransactionTypeID = 1
             };
 
             _financial.AddFinancialTransactionAfterPaymentOrder(financial);
+        }
+
+        public void AddFinancialTransactionForReturendProduct(int orderid, int price, string BankReceipt, string BankTransferNumber)
+        {
+            FinancialTransaction financial = new FinancialTransaction()
+            {
+                OrderID = orderid,
+                Price = price,
+                BankReceipt = BankReceipt,
+                BankTransferNumber = BankTransferNumber,
+                CreateDate = DateTime.Now,
+                FinancialTransactionTypeID = 2
+            };
+
+            _financial.AddFinancialTransactionAfterPaymentOrder(financial);
+        }
+
+        public decimal ExportMoney()
+        {
+            return _financial.ExportMoney();
         }
 
         public List<FinancialTransaction> GetAllFinancialTransaction()
         {
             return _financial.GetAllFinancialTransaction();
         }
-     
+
+        public decimal ReciveMoney()
+        {
+            return _financial.ReciveMoney();
+        }
     }
 }

@@ -39,7 +39,8 @@ namespace Application.Interfaces
         void PlusProductToTheOrderDetails(int orderdetailid);
         void MinusProductToTheOrderDetails(int orderdetailid);
         OrderDetails GetOrderDetailByID(int orderdetailid);
-
+        decimal GetPriceOfOrderDetailByOrderDetailID(int OrderdetailID);
+        void ReturnedProduct(OrderDetails orderDetails);
 
         #endregion
     }

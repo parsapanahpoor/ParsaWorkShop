@@ -28,7 +28,6 @@ namespace ParsaWorkShop.Controllers
 
         #region Register
 
-
         [Route("Register")]
         public ActionResult Register()
         {
@@ -71,7 +70,6 @@ namespace ParsaWorkShop.Controllers
 
         #region login
 
-
         [Route("Login")]
         public ActionResult Login(string ReturnUrl = "/")
         {
@@ -82,7 +80,7 @@ namespace ParsaWorkShop.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public ActionResult Login(LoginViewModel login , string ReturnUrl)
+        public ActionResult Login(LoginViewModel login, string ReturnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -90,8 +88,11 @@ namespace ParsaWorkShop.Controllers
             }
 
             var user = _userService.LoginUser(login);
+
             if (user != null)
             {
+                #region SetCoockie
+
                 if (user.IsActive)
                 {
                     var claims = new List<Claim>()
@@ -110,6 +111,8 @@ namespace ParsaWorkShop.Controllers
 
                     return Redirect(ReturnUrl);
                 }
+
+                #endregion
                 else
                 {
                     ModelState.AddModelError("phoneNumber", "حساب کاربری شما فعال نمی باشد");
@@ -123,6 +126,7 @@ namespace ParsaWorkShop.Controllers
         #endregion
 
         #region Logout
+
         [Route("Logout")]
         public IActionResult Logout()
         {
@@ -133,6 +137,7 @@ namespace ParsaWorkShop.Controllers
         #endregion
 
         #region CheckUserRoleForLogin
+
         public IActionResult ManageUserForLogin()
         {
             List<int> UserRoles = _userService.GetUsersRoles(User.Identity.Name);

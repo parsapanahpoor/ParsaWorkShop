@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.Order;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -61,6 +62,8 @@ namespace Domain.Models.Users
         public List<Slider.Slider> Sliders { get; set; }
         public List<Order.Orders> Orders { get; set; }
         public List<Locations> Locations { get; set; }
+        public List<ReturnedProducts> ReturnedProducts { get; set; }
+
         #endregion
 
     }

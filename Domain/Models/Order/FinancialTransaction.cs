@@ -27,9 +27,13 @@ namespace Domain.Models.Order
 
         public DateTime CreateDate { get; set; }
 
+        [ForeignKey("FinancialTransactionType")]
+        public int FinancialTransactionTypeID { get; set; }
+
         #region Navigations
 
         public Orders Order { get; set; }
+        public FinancialTransactionType FinancialTransactionType { get; set; }
 
         #endregion
     }

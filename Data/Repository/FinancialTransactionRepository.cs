@@ -24,10 +24,22 @@ namespace Data.Repository
             SaveChanges();
         }
 
+        public decimal ExportMoney()
+        {
+            return _context.FinancialTransactions.Where(p => p.FinancialTransactionTypeID == 2)
+                                .Sum(p => p.Price);
+        }
+
         public List<FinancialTransaction> GetAllFinancialTransaction()
         {
             return _context.FinancialTransactions.Include(p => p.Order)
                                              .ThenInclude(p => p.User).ToList();                                
+        }
+
+        public decimal ReciveMoney()
+        {
+            return _context.FinancialTransactions.Where(p => p.FinancialTransactionTypeID == 1)
+                                            .Sum(p => p.Price);
         }
 
         public void SaveChanges()

@@ -58,7 +58,6 @@ namespace ParsaWorkShop
 
             #region HttpContext
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             #endregion
 
             #region IoC

@@ -13,16 +13,20 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
+    [PermissionChecker(1)]
+
     public class OrderTrackingController : Controller
     {
         private IOrderService _order;
         private IUserService _userservice;
         private IFinancialTransactionService _financial;
-        public OrderTrackingController(IOrderService order, IUserService userService, IFinancialTransactionService financial)
+        private IReturendProductsService _returnProducts;
+        public OrderTrackingController(IOrderService order, IUserService userService, IFinancialTransactionService financial , IReturendProductsService returnProducts)
         {
             _order = order;
             _userservice = userService;
             _financial = financial;
+            _returnProducts = returnProducts;
         }
 
         [PermissionChecker(1)]
@@ -65,7 +69,73 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
         {
             List<FinancialTransaction> financials = _financial.GetAllFinancialTransaction();
 
+            ViewBag.ExportMoney = _financial.ExportMoney();
+            ViewBag.ReciveMoney = _financial.ReciveMoney();
+
             return View(financials);
+        }
+
+        public IActionResult ListOfReturnedProducts()
+        {
+            List<ReturnedProducts> products = _returnProducts.GetAllReturnedProducts();
+
+            return View(products);
+        }
+
+        public IActionResult CheckOutRequestForReturend(int? id)
+        {
+            if (id == null)
+            {
+                return View();
+            }
+
+            ReturnedProducts products = _returnProducts.GetReturendProductByID((int)id);
+
+            if (products == null)
+            {
+                return View();
+            }
+            OrderDetails orderDetail = _order.GetOrderDetailByID(products.OrderDetailID);
+            ViewBag.Location = _order.GetUserLocationByOrderID(orderDetail.OrderID);
+
+            return View(products);
+        }
+
+        public IActionResult DeclineReturnRequest(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ReturnedProducts returned = _returnProducts.GetReturendProductByID((int)id);
+            if (returned == null)
+            {
+                return NotFound();
+            }
+            _returnProducts.DeclineReturnRequest(returned);
+
+            return RedirectToAction(nameof(ListOfReturnedProducts));
+        }
+
+        public IActionResult AcceptReturnRequest(int? id)
+        { 
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ReturnedProducts returned = _returnProducts.GetReturendProductByID((int)id);
+            if (returned == null)
+            {
+                return NotFound();
+            }
+            _returnProducts.AcceptReturnRequest(returned);
+
+            OrderDetails orderDetail = _order.GetOrderDetailByID(returned.OrderDetailID);
+            decimal price = _order.GetPriceOfOrderDetailByOrderDetailID(returned.OrderDetailID);
+            _financial.AddFinancialTransactionForReturendProduct(orderDetail.OrderID, (int)price, "", "");
+            _order.ReturnedProduct(orderDetail);
+
+            return RedirectToAction(nameof(ListOfReturnedProducts));
         }
     }
 }

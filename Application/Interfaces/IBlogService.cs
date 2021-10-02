@@ -12,7 +12,7 @@ namespace Application.Interfaces
     public interface IBlogService
     {
 
-        #region MyRegion
+        #region Categories
 
         BlogCategory GetBlogCategoryById(int id);
         List<BlogCategory> GetAllBlogCategories();

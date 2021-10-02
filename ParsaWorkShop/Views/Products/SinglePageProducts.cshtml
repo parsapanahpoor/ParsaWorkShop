@@ -51,6 +51,15 @@
             <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <div class="section-title ms-md-4">
                     <h4 class="title">@Model.ProductTitle</h4>
+                    @if (Model.IsInOffer == true)
+                    {
+                        <h5 class="text-muted">
+                            <del style=" color:red;">
+                                @Model.OldPrice.Value.ToString("#,0") تومان
+                            </del>
+                      </h5>
+
+                    }
                     <h5 class="text-muted">@Model.Price.ToString("#,0") تومان  </h5>
 
 

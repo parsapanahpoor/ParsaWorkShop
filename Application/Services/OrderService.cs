@@ -103,6 +103,13 @@ namespace Application.Services
             return _order.GetOrdersByUsersId(userid);
         }
 
+        public decimal GetPriceOfOrderDetailByOrderDetailID(int OrderdetailID)
+        {
+            OrderDetails orderDetail = GetOrderDetailByID(OrderdetailID);
+
+            return orderDetail.Price * orderDetail.Count;
+        }
+
         public Locations GetUserLocationByOrderId(int orderid)
         {
             return _order.GetUserLocationByOrderId(orderid);
@@ -160,6 +167,12 @@ namespace Application.Services
             OrderDetails orderDetails = _order.GetOrderDetailByID(orderdetailid);
 
             _order.RemoveProductFromShopCart(orderDetails);
+        }
+
+        public void ReturnedProduct(OrderDetails orderDetails)
+        {
+            orderDetails.IsReturend = true;
+            _order.UpdateOrderDetail(orderDetails);
         }
 
         public Orders UpdateOrderByLocationid(Orders orders, int locationid)

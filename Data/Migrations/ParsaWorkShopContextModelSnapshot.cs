@@ -319,6 +319,9 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("FinancialTransactionTypeID")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 
@@ -327,9 +330,24 @@ namespace Data.Migrations
 
                     b.HasKey("FinancialTransactionID");
 
+                    b.HasIndex("FinancialTransactionTypeID");
+
                     b.HasIndex("OrderID");
 
                     b.ToTable("FinancialTransactions");
+                });
+
+            modelBuilder.Entity("Domain.Models.Order.FinancialTransactionType", b =>
+                {
+                    b.Property<int>("FinancialTransactionTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FinancialTransactionTypeID");
+
+                    b.ToTable("FinancialTransactionType");
                 });
 
             modelBuilder.Entity("Domain.Models.Order.OrderDetails", b =>
@@ -341,6 +359,9 @@ namespace Data.Migrations
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsReturend")
+                        .HasColumnType("bit");
 
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
@@ -386,6 +407,56 @@ namespace Data.Migrations
                     b.HasIndex("Userid");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Domain.Models.Order.ReturnedProductType", b =>
+                {
+                    b.Property<int>("ReturnedProductTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReturnedProductTypeID");
+
+                    b.ToTable("ReturnedProductTypes");
+                });
+
+            modelBuilder.Entity("Domain.Models.Order.ReturnedProducts", b =>
+                {
+                    b.Property<int>("ReturnedProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("OrderDetailID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReturnProductTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReturnedProductID");
+
+                    b.HasIndex("OrderDetailID");
+
+                    b.HasIndex("ReturnProductTypeID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ReturnedProducts");
                 });
 
             modelBuilder.Entity("Domain.Models.Permissions.Permission", b =>
@@ -457,6 +528,9 @@ namespace Data.Migrations
 
                     b.Property<int?>("OfferPercent")
                         .HasColumnType("int");
+
+                    b.Property<decimal?>("OldPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -859,11 +933,19 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Models.Order.FinancialTransaction", b =>
                 {
+                    b.HasOne("Domain.Models.Order.FinancialTransactionType", "FinancialTransactionType")
+                        .WithMany("FinancialTransactions")
+                        .HasForeignKey("FinancialTransactionTypeID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Domain.Models.Order.Orders", "Order")
                         .WithMany("FinancialTransactions")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("FinancialTransactionType");
 
                     b.Navigation("Order");
                 });
@@ -902,6 +984,33 @@ namespace Data.Migrations
                     b.Navigation("Locations");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Models.Order.ReturnedProducts", b =>
+                {
+                    b.HasOne("Domain.Models.Order.OrderDetails", "OrderDetails")
+                        .WithMany("ReturnedProducts")
+                        .HasForeignKey("OrderDetailID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Order.ReturnedProductType", "ReturnedProductType")
+                        .WithMany("ReturnedProducts")
+                        .HasForeignKey("ReturnProductTypeID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Users.User", "Users")
+                        .WithMany("ReturnedProducts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("OrderDetails");
+
+                    b.Navigation("ReturnedProductType");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Domain.Models.Permissions.Permission", b =>
@@ -1047,11 +1156,26 @@ namespace Data.Migrations
                     b.Navigation("comments");
                 });
 
+            modelBuilder.Entity("Domain.Models.Order.FinancialTransactionType", b =>
+                {
+                    b.Navigation("FinancialTransactions");
+                });
+
+            modelBuilder.Entity("Domain.Models.Order.OrderDetails", b =>
+                {
+                    b.Navigation("ReturnedProducts");
+                });
+
             modelBuilder.Entity("Domain.Models.Order.Orders", b =>
                 {
                     b.Navigation("FinancialTransactions");
 
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("Domain.Models.Order.ReturnedProductType", b =>
+                {
+                    b.Navigation("ReturnedProducts");
                 });
 
             modelBuilder.Entity("Domain.Models.Permissions.Permission", b =>
@@ -1102,6 +1226,8 @@ namespace Data.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Product");
+
+                    b.Navigation("ReturnedProducts");
 
                     b.Navigation("Sliders");
 

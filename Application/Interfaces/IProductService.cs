@@ -58,5 +58,15 @@ namespace Application.Interfaces
         void DeleteProductGallery(ProductGallery product);
         void DeleteAllProductGAlleries(List<ProductGallery> productGalleries);
         #endregion
+
+
+        #region Offer
+
+        List<Product> GetAllProductsInOffer();
+        List<Product> GetAllProductsNotInOffer();
+        void DeleteProductFromOffer(Product product);
+        List<Product> GetLastestOfferProducts();
+
+        #endregion
     }
 }

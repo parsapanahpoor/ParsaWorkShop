@@ -55,7 +55,15 @@ namespace Domain.Interfaces
         void AddProductGallery(ProductGallery product);
         ProductGallery GetProductGalleryByID(int id);
         void DeleteProductGallery(ProductGallery product);
-        
+
+        #endregion
+
+        #region Offer
+
+        List<Product> GetAllProductsInOffer();
+        List<Product> GetAllProductsNotInOffer();
+        List<Product> GetLastestOfferProducts();
+
         #endregion
     }
 }

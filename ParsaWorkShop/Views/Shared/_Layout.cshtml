@@ -91,13 +91,13 @@
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu">
                     <li><a href="/" class="sub-menu-item">صفحه اصلی </a></li>
-                    <cache expires-after="@TimeSpan.FromDays(1)">
+                    <cache expires-after="@TimeSpan.FromMinutes(30)">
                         @await Component.InvokeAsync("ProductCategriesForMenuComponent")
                     </cache>
-                    <cache expires-after="@TimeSpan.FromDays(1)">
+                    <cache expires-after="@TimeSpan.FromMinutes(30)">
                         @await Component.InvokeAsync("BlogCategriesForMenuComponent")
                     </cache>
-                    <cache expires-after="@TimeSpan.FromDays(1)">
+                    <cache expires-after="@TimeSpan.FromMinutes(30)">
                         @await Component.InvokeAsync("VideosCategriesForMenuComponent")
                     </cache>
 

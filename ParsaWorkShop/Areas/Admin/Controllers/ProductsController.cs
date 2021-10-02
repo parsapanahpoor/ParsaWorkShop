@@ -93,7 +93,7 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete")] Product product, IFormFile imgProductUp, List<int> SelectedCategory)
+        public IActionResult Edit(int id, [Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete,OldPrice")] Product product, IFormFile imgProductUp, List<int> SelectedCategory)
         {
             if (id != product.ProductID)
             {
@@ -232,6 +232,75 @@ namespace ParsaWorkShop.Areas.Admin.Controllers
             return View(_comment.GetCommentByBlogId(productid));
         }
 
+        #endregion
+
+
+        #region Offer
+
+        public IActionResult ListOfProductsInOffer(bool Add = false , bool Delete = false)
+        {
+            if (Add == true)
+            {
+                ViewBag.Add = true;
+            }
+            if (Delete == true)
+            {
+                ViewBag.Delete = true;
+            }
+
+            return View(_product.GetAllProductsInOffer());
+        }
+
+        public IActionResult ListOffProductsNotInOffer()
+        {
+            return View(_product.GetAllProductsNotInOffer());
+        }
+
+        public IActionResult AddProductToTheOffer(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Product product = _product.GetProductByID((int)id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            ViewData["ProductCategories"] = _product.GetAllProductCategories();
+            ViewData["ProductSelectedCategories"] = _product.GetAllProductSelectedCategories();
+
+            return View(product);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddProductToTheOffer(int id, [Bind("ProductID,UserId,ProductTitle,ShortDescription,LongDescription,ProductImageName,OfferPercent,IsInOffer,ProductCount,Price,Tags,CreateDate,IsActive,IsDelete,OldPrice")] Product product, IFormFile imgProductUp, List<int> SelectedCategory)
+        {
+            if (ModelState.IsValid)
+            {
+                product.IsInOffer = true;
+                var productid = _product.UpdateProduct(product, imgProductUp);
+                _product.EditProductSelectedCategory(SelectedCategory, productid);
+
+                return Redirect("/Admin/Products/ListOfProductsInOffer?Add=true");
+            }
+
+            ViewData["ProductCategories"] = _product.GetAllProductCategories();
+            ViewData["ProductSelectedCategories"] = _product.GetAllProductSelectedCategories();
+            return View(product);
+        }
+
+        public IActionResult DeleteProductFromOffer(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Product product = _product.GetProductByID((int)id);
+            _product.DeleteProductFromOffer(product);
+
+            return Redirect("/Admin/Products/ListOfProductsInOffer?Delete=true");
+        }
         #endregion
 
     }

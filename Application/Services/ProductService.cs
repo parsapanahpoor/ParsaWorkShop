@@ -152,6 +152,16 @@ namespace Application.Services
             _product.DeleteProductFeature(feature);
         }
 
+        public void DeleteProductFromOffer(Product product)
+        {
+            product.Price = product.OldPrice.Value;
+            product.OldPrice = null;
+            product.IsInOffer = null;
+            product.OfferPercent = null;
+
+            _product.UpdateProduct(product);
+        }
+
         public void DeleteProductGallery(ProductGallery product)
         {
             string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Product/ProducGallery", product.ImageName);
@@ -188,6 +198,16 @@ namespace Application.Services
             return _product.GetAllProductSelectedCategories();
         }
 
+        public List<Product> GetAllProductsInOffer()
+        {
+            return _product.GetAllProductsInOffer();
+        }
+
+        public List<Product> GetAllProductsNotInOffer()
+        {
+            return _product.GetAllProductsNotInOffer();
+        }
+
         public ProductFeature GetFeatureById(int id)
         {
             return _product.GetFeatureById(id);
@@ -196,6 +216,11 @@ namespace Application.Services
         public List<ProductGallery> GetGalleryById(int id)
         {
             return _product.GetGalleryById(id);
+        }
+
+        public List<Product> GetLastestOfferProducts()
+        {
+            return _product.GetLastestOfferProducts();
         }
 
         public List<Product> GetLastestProductsIndexPage()
@@ -245,7 +270,7 @@ namespace Application.Services
 
         public Tuple<List<Product>, int> GetProductsForShowInHomePage(int? Categroyid, int pageId = 1, string filter = "", int take = 0)
         {
-            if (take == 0) take = 12;
+            if (take == 0) take = 15;
 
             IQueryable<Product> products = _product.GetAllProductForIQueryAble();
 
@@ -270,7 +295,7 @@ namespace Application.Services
             int skip = (pageId - 1) * take;
             int pageCount = (products.Count() / take);
 
-            if ((pageCount % 2) != 0)
+            if ((pageCount % 2) == 0 || (pageCount % 2) != 0 )
             {
                 pageCount += 1;
             }

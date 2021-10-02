@@ -12,5 +12,7 @@ namespace Domain.Interfaces
         void AddFinancialTransactionAfterPaymentOrder(FinancialTransaction financial);
         void SaveChanges();
         List<FinancialTransaction> GetAllFinancialTransaction();
+        decimal ReciveMoney();
+        decimal ExportMoney();
     }
 }

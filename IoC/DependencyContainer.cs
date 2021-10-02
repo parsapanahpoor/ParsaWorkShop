@@ -25,6 +25,7 @@ namespace IoC
             service.AddScoped<IOrderService, OrderService>();
             service.AddScoped<ILocationService, LocationService>();
             service.AddScoped<IFinancialTransactionService, FinancialTransactionService>();
+            service.AddScoped<IReturendProductsService, ReturendProductsService>();
 
             #endregion
 
@@ -39,6 +40,7 @@ namespace IoC
             service.AddScoped<ILocationRepository, LocationRepository>();
             service.AddScoped<IOrderRepository, OrderRepository>();
             service.AddScoped<IFinancialTransactionRepository, FinancialTransactionRepository>();
+            service.AddScoped<IReturendProductsRepository, ReturendProductsReposiotry>();
 
             #endregion
 
